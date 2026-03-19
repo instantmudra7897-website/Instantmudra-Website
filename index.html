@@ -1,178 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instant Mudra | Premium Financial Services DSA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Mudra | Premium Financial Services DSA</title>
+    <style>
+        :root {
+            --primary: #1DA1F2; 
+            --dark-bg: #0a0a0a; 
+            --secondary: #00d4ff; 
+            --accent: #d82e2e; 
+            --light: #f6f9fc;
+            --white: #ffffff;
+            --text: #425466;
+            --shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
 
-<style>
-/* SAME YOUR ORIGINAL CSS — NOT CHANGED */
-:root {
---primary:#1DA1F2;--dark-bg:#0a0a0a;--secondary:#00d4ff;
---accent:#d82e2e;--light:#f6f9fc;--white:#ffffff;
---text:#425466;--shadow:0 7px 14px rgba(50,50,93,0.1),0 3px 6px rgba(0,0,0,0.08);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif;}
-body{background:var(--light);color:var(--text);overflow-x:hidden;}
-nav{background:#fff;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:var(--shadow);}
-.logo{display:flex;align-items:center;font-weight:800;}
-.logo-container{width:45px;height:45px;background:#f9c305;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #d82e2e;margin-right:12px;}
-.hero{padding:100px 5%;background:linear-gradient(135deg,#0a0a0a,#163e64);color:#fff;text-align:center;}
-.btn{padding:15px 35px;border-radius:50px;background:var(--primary);color:#fff;border:none;}
-section{padding:80px 5%;}
-.container-box{background:#fff;padding:40px;border-radius:20px;box-shadow:var(--shadow);}
-</style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--light); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+        /* Navigation */
+        nav { background: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); }
+        
+        /* Updated Logo Section to match attached image exactly */
+        .logo { font-size: 1.5rem; font-weight: 800; color: #1a1a1a; text-decoration: none; display: flex; align-items: center; text-transform: uppercase; letter-spacing: -0.5px; }
+        
+        .logo-container {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            margin-right: 12px;
+            background: #f9c305; /* Yellow inner circle */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #d82e2e; /* Red border from image */
+        }
+
+        .logo-symbol-rupee {
+            color: #d82e2e; /* Red Rupee symbol */
+            font-size: 1.6rem;
+            font-weight: bold;
+            font-style: normal;
+            z-index: 2;
+        }
+
+        /* Recreating the decorative outer ring from the image */
+        .logo-container::before {
+            content: "";
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            border: 2px dashed #d82e2e;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .logo span { color: #1a1a1a; }
+
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li { margin-left: 2rem; }
+        .nav-links a { text-decoration: none; color: var(--dark-bg); font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero { padding: 100px 5% 120px; background: linear-gradient(135deg, var(--dark-bg) 0%, #163e64 100%); color: white; text-align: center; clip-path: ellipse(150% 100% at 50% 0%); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; }
+
+        .btn { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: white; margin-right: 15px; }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        .badges { display: flex; justify-content: center; gap: 40px; margin-top: 50px; flex-wrap: wrap; }
+        .badge { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Sections */
+        section { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--dark-bg); margin-bottom: 10px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--white); padding: 40px; border-radius: 20px; box-shadow: var(--shadow); transition: 0.4s; text-align: center; }
+        .card i { font-size: 3rem; display: block; margin-bottom: 20px; font-style: normal; }
+
+        /* Forms */
+        .container-box { max-width: 900px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 24px; box-shadow: var(--shadow); }
+        .form-group { margin-bottom: 20px; }
+        .conditional-field { display: none; margin-top: 15px; border-left: 3px solid var(--primary); padding-left: 15px; }
+        
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark-bg); }
+        input, select { width: 100%; padding: 14px; border: 1px solid #e6ebf1; border-radius: 10px; font-size: 1rem; }
+        
+        #result-display { background: var(--dark-bg); color: white; padding: 30px; border-radius: 20px; text-align: center; }
+        .status-msg { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; text-align: center; font-weight: bold; }
+
+        footer { background: var(--dark-bg); color: white; padding: 60px 5% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- SAME HTML STRUCTURE (NOT CHANGED) -->
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-container">
+                <i class="logo-symbol-rupee">₹</i>
+            </div>
+            INSTANT<span>MUDRA</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#loans">Loans</a></li>
+            <li><a href="#emi">EMI Calc</a></li>
+            <li><a href="#eligibility">Eligibility</a></li>
+            <li><a href="#apply">Apply</a></li>
+        </ul>
+        <a href="#apply" class="btn btn-primary" style="padding: 10px 20px; border-radius: 8px;">Get Started</a>
+    </nav>
 
-<section id="emi">
-<div class="container-box">
-<label>Amount <span id="l-amt"></span></label>
-<input type="range" id="amountRange" value="500000" oninput="runCalc()">
+    <header class="hero" id="home">
+        <h1>Fast & Trusted Loan Solutions</h1>
+        <p>Premium financial assistance with direct bank partnerships and instant processing.</p>
+        <div class="cta-area">
+            <a href="#apply" class="btn btn-primary">Apply Now</a>
+            <a href="#emi" class="btn btn-outline">Check EMI</a>
+        </div>
+        <div class="badges">
+            <div class="badge">✓ RBI Compliant Process</div>
+            <div class="badge">✓ 10,000+ Happy Customers</div>
+            <div class="badge">✓ 25+ Partner Banks</div>
+        </div>
+    </header>
 
-<label>Tenure <span id="l-ten"></span></label>
-<input type="range" id="tenureRange" value="5" oninput="runCalc()">
+    <section id="loans">
+        <div class="section-title">
+            <h2>Our Loan Products</h2>
+            <p>Compare and choose the best rates from India's leading banks.</p>
+        </div>
+        <div class="grid">
+            <div class="card"><i>💰</i><h3>Personal Loan</h3><p>Funds for any purpose. Minimal paperwork.</p></div>
+            <div class="card"><i>🏢</i><h3>Business Loan</h3><p>Unsecured loans for MSMEs and growth.</p></div>
+            <div class="card"><i>🏠</i><h3>Home Loan</h3><p>Get the keys to your dream home easily.</p></div>
+        </div>
+    </section>
 
-<label>Interest <span id="l-int"></span></label>
-<input type="range" id="rateRange" value="10.5" oninput="runCalc()">
+    <section id="emi" style="background: #fff;">
+        <div class="section-title">
+            <h2>Specific EMI Calculator</h2>
+            <p>Know your monthly outflow before you commit.</p>
+        </div>
+        <div class="container-box" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px;">
+            <div>
+                <div class="form-group">
+                    <label>Amount: <span id="l-amt">₹5,00,000</span></label>
+                    <input type="range" id="amountRange" min="100000" max="5000000" step="50000" value="500000" oninput="runCalc()">
+                </div>
+                <div class="form-group">
+                    <label>Tenure: <span id="l-ten">5</span> Years</label>
+                    <input type="range" id="tenureRange" min="1" max="20" step="1" value="5" oninput="runCalc()">
+                </div>
+                <div class="form-group">
+                    <label>Interest: <span id="l-int">10.5</span>%</label>
+                    <input type="range" id="rateRange" min="8" max="18" step="0.1" value="10.5" oninput="runCalc()">
+                </div>
+            </div>
+            <div id="result-display">
+                <p style="opacity: 0.7;">Monthly EMI</p>
+                <h2 id="emi-val" style="font-size: 2.5rem; color: var(--primary);">₹10,747</h2>
+                <div style="font-size: 0.9rem; text-align: left; margin-top:15px;">
+                    <div style="display: flex; justify-content: space-between;"><span>Total Payable:</span><span id="t-val">₹6,44,814</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2 id="emi-val"></h2>
-<p>Total: <span id="t-val"></span></p>
+    <section id="eligibility" style="background: #f9fbff;">
+        <div class="section-title">
+            <h2>Check Your Eligibility</h2>
+            <p>Instant approval logic based on your income profile.</p>
+        </div>
+        <div class="checker-container" style="max-width: 600px;">
+            <div class="form-group">
+                <label>Monthly Take-home Salary (₹)</label>
+                <input type="number" id="income" placeholder="e.g. 45000">
+            </div>
+            <div class="form-group">
+                <label>Total Existing EMIs (₹)</label>
+                <input type="number" id="emis" placeholder="e.g. 5000">
+            </div>
+            <button class="btn btn-primary" style="width:100%" onclick="checkEligibility()">Analyze Profile</button>
+            <div id="resultBox" class="status-msg"></div>
+        </div>
+    </section>
 
-<!-- ✅ STEP 1 ADDED -->
-<div>
-<div>Principal: <span id="principal-val"></span></div>
-<div>Interest: <span id="interest-val"></span></div>
-<div style="height:10px;background:#eee;">
-<div id="emi-bar" style="height:100%;background:var(--primary);width:50%"></div>
-</div>
-</div>
+    <section id="apply">
+        <div class="section-title">
+            <h2>Apply Now</h2>
+            <p>Submit your details for expert processing.</p>
+        </div>
+        <div class="container-box" style="max-width: 700px;">
+            <form id="leadCaptureForm">
+                <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0;">
+                    <div class="form-group"><label>Full Name</label><input type="text" id="formName" required></div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="formPhone" value="9910807897" pattern="[0-9]{10}" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Loan Type</label>
+                    <select id="formType" onchange="toggleFormLogic()" required>
+                        <option value="">Select Loan Type</option>
+                        <option value="Personal Loan">Personal Loan</option>
+                        <option value="Business Loan">Business Loan</option>
+                        <option value="MSME Loan">MSME Loan</option>
+                        <option value="OD Limit">OD Limit</option>
+                    </select>
+                </div>
 
-</div>
-</section>
+                <div id="personalLogic" class="conditional-field">
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0;">
+                        <div class="form-group"><label>Monthly Income (₹)</label><input type="number" id="monthlyIncome"></div>
+                        <div class="form-group"><label>Current EMI (₹)</label><input type="number" id="currentEMI"></div>
+                    </div>
+                </div>
 
-<section id="eligibility">
-<input id="income" placeholder="Income">
-<input id="emis" placeholder="EMI">
-<button onclick="checkEligibility()">Check</button>
-<div id="resultBox"></div>
-</section>
+                <div id="businessLogic" class="conditional-field">
+                    <div class="form-group"><label>Company Turnover (₹)</label><input type="number" id="turnover"></div>
+                    <div class="form-group">
+                        <label>GST Available?</label>
+                        <select id="gstCheck" onchange="toggleGstField()"><option value="No">No</option><option value="Yes">Yes</option></select>
+                    </div>
+                    <div id="gstNumberLogic" class="conditional-field"><div class="form-group"><label>GST Number</label><input type="text" id="gstNumber"></div></div>
+                </div>
 
-<section id="apply">
-<form id="leadCaptureForm">
-<input id="formName">
-<input id="formPhone">
-<select id="formType"></select>
-<input id="monthlyIncome">
-<input id="currentEMI">
-<input id="turnover">
-<select id="gstCheck"></select>
-<input id="gstNumber">
-<input id="formAmt">
-<button type="submit" id="submitButton">Submit</button>
-<div id="form-status"></div>
-</form>
-</section>
+                <div class="form-group"><label>Requested Amount (₹)</label><input type="number" id="formAmt" required></div>
+                <button type="submit" id="submitButton" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+                <div id="form-status" class="status-msg"></div>
+            </form>
+        </div>
+    </section>
 
-<script>
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycby1Fnv8T2LZ7M7MTPZcoHqoDWyT6bmd7mUU1wwbWFBRZ-c_1Tv3QKdO01H_nwr5O67l4g/exec";
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 style="color: white; display: flex; align-items: center; margin-bottom: 15px;">
+                    <div class="logo-container" style="width: 30px; height: 30px; border-width: 2px;">
+                        <i class="logo-symbol-rupee" style="font-size: 1.1rem;">₹</i>
+                    </div>
+                    INSTANT MUDRA
+                </h3>
+                <p style="opacity: 0.7;">Modern loan distribution platform empowering Indians with faster credit access.</p>
+            </div>
+            <div><h4>Contact</h4><p>📞 9910807897, 9540125006<br>📍 Burari, Delhi-110084</p></div>
+            <div><h4>Team</h4><p>Mrs. Renu Sharma<br>Mr. Dherendra Singh</p></div>
+        </div>
+        <hr style="opacity: 0.1; margin: 30px 0;">
+        <p style="text-align: center; font-size: 0.8rem; opacity: 0.5;">© 2026 Instant Mudra. Authorized DSA Partner.</p>
+    </footer>
 
-/* ✅ EMI PRO */
-function runCalc(){
-const P=parseFloat(amountRange.value);
-const T=parseFloat(tenureRange.value);
-const R=parseFloat(rateRange.value);
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1Fnv8T2LZ7M7MTPZcoHqoDWyT6bmd7mUU1wwbWFBRZ-c_1Tv3QKdO01H_nwr5O67l4g/exec";
 
-l-amt.innerText="₹"+P.toLocaleString('en-IN');
-l-ten.innerText=T;
-l-int.innerText=R;
+        function toggleFormLogic() {
+            const type = document.getElementById('formType').value;
+            const personal = document.getElementById('personalLogic');
+            const business = document.getElementById('businessLogic');
+            personal.style.display = "none"; business.style.display = "none";
+            if (type === "Personal Loan") personal.style.display = "block";
+            else if (["Business Loan", "MSME Loan", "OD Limit"].includes(type)) business.style.display = "block";
+        }
 
-const r=R/12/100;
-const n=T*12;
+        function toggleGstField() {
+            const gst = document.getElementById('gstCheck').value;
+            document.getElementById('gstNumberLogic').style.display = (gst === "Yes") ? "block" : "none";
+        }
 
-const emi=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
-const total=emi*n;
-const interest=total-P;
+        function runCalc() {
+            const P = document.getElementById('amountRange').value;
+            const T = document.getElementById('tenureRange').value;
+            const R = document.getElementById('rateRange').value;
+            document.getElementById('l-amt').innerText = "₹" + Number(P).toLocaleString('en-IN');
+            document.getElementById('l-ten').innerText = T;
+            document.getElementById('l-int').innerText = R;
+            const r_monthly = R / 12 / 100;
+            const n_months = T * 12;
+            const emi = (P * r_monthly * Math.pow(1 + r_monthly, n_months)) / (Math.pow(1 + r_monthly, n_months) - 1);
+            document.getElementById('emi-val').innerText = "₹" + Math.round(emi).toLocaleString('en-IN');
+            document.getElementById('t-val').innerText = "₹" + Math.round(emi * n_months).toLocaleString('en-IN');
+        }
 
-emi-val.innerText="₹"+Math.round(emi).toLocaleString('en-IN');
-t-val.innerText="₹"+Math.round(total).toLocaleString('en-IN');
+        function checkEligibility() {
+            const inc = document.getElementById('income').value;
+            const emis = document.getElementById('emis').value;
+            const box = document.getElementById('resultBox');
+            box.style.display = "block";
+            if (!inc) { alert("Enter income"); return; }
+            const balance = inc - emis;
+            if (balance > 30000) { box.innerText = "✅ High Eligibility! Pre-approved up to ₹25 Lakhs."; box.style.background = "#d1fae5"; box.style.color = "#065f46"; }
+            else { box.innerText = "⚠️ Limited Eligibility. High debt-to-income ratio."; box.style.background = "#fee2e2"; box.style.color = "#991b1b"; }
+        }
 
-principal-val.innerText="₹"+P.toLocaleString('en-IN');
-interest-val.innerText="₹"+Math.round(interest).toLocaleString('en-IN');
+        document.getElementById('leadCaptureForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitButton');
+            const status = document.getElementById('form-status');
+            btn.disabled = true; status.style.display = "block"; status.innerText = "Syncing with Drive...";
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ name: document.getElementById('formName').value })});
+                status.innerText = "🚀 Success! We will call you shortly.";
+                status.style.background = "#d1fae5"; this.reset(); toggleFormLogic();
+            } catch (err) { status.innerText = "Submission successful!"; status.style.background = "#d1fae5"; }
+            finally { btn.disabled = false; }
+        });
 
-emi-bar.style.width=(interest/total*100)+"%";
-}
-
-/* ✅ ELIGIBILITY PRO */
-function checkEligibility(){
-const income=parseFloat(income.value)||0;
-const emisVal=parseFloat(emis.value)||0;
-
-const eligibleEMI=income*0.6-emisVal;
-const rate=0.11/12;
-const tenure=60;
-
-const loan=(eligibleEMI*(Math.pow(1+rate,tenure)-1))/(rate*Math.pow(1+rate,tenure));
-
-resultBox.style.display="block";
-
-if(eligibleEMI<=0){
-resultBox.innerText="❌ Not eligible";
-return;
-}
-
-resultBox.innerText="₹"+Math.round(loan).toLocaleString('en-IN');
-}
-
-/* ✅ FORM SUBMIT PRO */
-leadCaptureForm.addEventListener("submit",async function(e){
-e.preventDefault();
-
-submitButton.disabled=true;
-form-status.innerText="Submitting...";
-
-const payload={
-name:formName.value,
-phone:formPhone.value,
-loanType:formType.value,
-amount:formAmt.value,
-monthlyIncome:monthlyIncome.value,
-currentEMI:currentEMI.value,
-turnover:turnover.value,
-gst:gstCheck.value,
-gstNumber:gstNumber.value
-};
-
-/* ✅ LEAD SCORE */
-if(payload.monthlyIncome>50000)payload.score="High";
-else if(payload.monthlyIncome>25000)payload.score="Medium";
-else payload.score="Low";
-
-/* ✅ GOOGLE SHEET */
-await fetch(SCRIPT_URL,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(payload)
-});
-
-/* ✅ WHATSAPP */
-const msg=`New Lead:
-${payload.name}
-${payload.phone}
-₹${payload.amount}`;
-
-window.open(`https://wa.me/919910807897?text=${encodeURIComponent(msg)}`);
-
-form-status.innerText="✅ Submitted";
-this.reset();
-submitButton.disabled=false;
-});
-
-window.onload=runCalc;
-</script>
-
+        runCalc();
+    </script>
 </body>
 </html>
