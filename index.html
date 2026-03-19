@@ -265,53 +265,71 @@
     </footer>
 
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1Fnv8T2LZ7M7MTPZcoHqoDWyT6bmd7mUU1wwbWFBRZ-c_1Tv3QKdO01H_nwr5O67l4g/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1Fnv8T2LZ7M7MTPZcoHqoDWyT6bmd7mUU1wwbWFBRZ-c_1Tv3QKdO01H_nwr5O67l4g/exec";
 
-        function toggleFormLogic() {
-            const type = document.getElementById('formType').value;
-            const personal = document.getElementById('personalLogic');
-            const business = document.getElementById('businessLogic');
-            personal.style.display = "none"; business.style.display = "none";
-            if (type === "Personal Loan") personal.style.display = "block";
-            else if (["Business Loan", "MSME Loan", "OD Limit"].includes(type)) business.style.display = "block";
-        }
+/* ================= EMI CALCULATOR ================= */
+function runCalc() {
+    const P = parseFloat(document.getElementById('amountRange').value);
+    const T = parseFloat(document.getElementById('tenureRange').value);
+    const R = parseFloat(document.getElementById('rateRange').value);
 
-        function toggleGstField() {
-            const gst = document.getElementById('gstCheck').value;
-            document.getElementById('gstNumberLogic').style.display = (gst === "Yes") ? "block" : "none";
-        }
+    document.getElementById('l-amt').innerText = "₹" + P.toLocaleString('en-IN');
+    document.getElementById('l-ten').innerText = T;
+    document.getElementById('l-int').innerText = R;
 
-        function runCalc() {
-            const P = document.getElementById('amountRange').value;
-            const T = document.getElementById('tenureRange').value;
-            const R = document.getElementById('rateRange').value;
-            document.getElementById('l-amt').innerText = "₹" + Number(P).toLocaleString('en-IN');
-            document.getElementById('l-ten').innerText = T;
-            document.getElementById('l-int').innerText = R;
-            const r_monthly = R / 12 / 100;
-            const n_months = T * 12;
-            const emi = (P * r_monthly * Math.pow(1 + r_monthly, n_months)) / (Math.pow(1 + r_monthly, n_months) - 1);
-            document.getElementById('emi-val').innerText = "₹" + Math.round(emi).toLocaleString('en-IN');
-            document.getElementById('t-val').innerText = "₹" + Math.round(emi * n_months).toLocaleString('en-IN');
-        }
+    const r = R / 12 / 100;
+    const n = T * 12;
 
-        function checkEligibility() {
-            const inc = document.getElementById('income').value;
-            const emis = document.getElementById('emis').value;
-            const box = document.getElementById('resultBox');
-            box.style.display = "block";
-            if (!inc) { alert("Enter income"); return; }
-            const balance = inc - emis;
-<<<<<<< HEAD
-            if (balance > 50000) { box.innerText = "✅ High Eligibility! Pre-approved up to ₹25 Lakhs."; box.style.background = "#d1fae5"; box.style.color = "#065f46"; }
-=======
-            if (balance > 30000) { box.innerText = "✅ High Eligibility! Pre-approved up to ₹25 Lakhs."; box.style.background = "#d1fae5"; box.style.color = "#065f46"; }
->>>>>>> 2add5b5 (first commit)
-            else { box.innerText = "⚠️ Limited Eligibility. High debt-to-income ratio."; box.style.background = "#fee2e2"; box.style.color = "#991b1b"; }
-        }
+    const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
 
-        document.getElementById('leadCaptureForm').addEventListener('submit', async function(e) {
-<<<<<<< HEAD
+    document.getElementById('emi-val').innerText = "₹" + Math.round(emi).toLocaleString('en-IN');
+    document.getElementById('t-val').innerText = "₹" + Math.round(emi * n).toLocaleString('en-IN');
+}
+
+/* ================= ELIGIBILITY ================= */
+function checkEligibility() {
+    const inc = parseFloat(document.getElementById('income').value) || 0;
+    const emis = parseFloat(document.getElementById('emis').value) || 0;
+
+    const box = document.getElementById('resultBox');
+    box.style.display = "block";
+
+    if (!inc) {
+        box.innerText = "❌ Please enter income";
+        box.style.background = "#fee2e2";
+        return;
+    }
+
+    const balance = inc - emis;
+
+    if (balance > 30000) {
+        box.innerText = "✅ High Eligibility! Pre-approved up to ₹25 Lakhs.";
+        box.style.background = "#d1fae5";
+        box.style.color = "#065f46";
+    } else {
+        box.innerText = "⚠️ Limited Eligibility. High debt-to-income ratio.";
+        box.style.background = "#fee2e2";
+        box.style.color = "#991b1b";
+    }
+}
+
+/* ================= FORM LOGIC ================= */
+function toggleFormLogic() {
+    const type = document.getElementById('formType').value;
+    document.getElementById('personalLogic').style.display =
+        type === "Personal Loan" ? "block" : "none";
+
+    document.getElementById('businessLogic').style.display =
+        ["Business Loan", "MSME Loan", "OD Limit"].includes(type) ? "block" : "none";
+}
+
+function toggleGstField() {
+    document.getElementById('gstNumberLogic').style.display =
+        document.getElementById('gstCheck').value === "Yes" ? "block" : "none";
+}
+
+/* ================= FORM SUBMIT ================= */
+document.getElementById('leadCaptureForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const btn = document.getElementById('submitButton');
@@ -322,20 +340,23 @@
     status.innerText = "Submitting...";
 
     const payload = {
-        name: document.getElementById('formName')?.value || "",
-        phone: document.getElementById('formPhone')?.value || "",
-        loanType: document.getElementById('formType')?.value || "",
-        amount: document.getElementById('formAmt')?.value || "",
-        monthlyIncome: document.getElementById('monthlyIncome')?.value || "",
-        currentEMI: document.getElementById('currentEMI')?.value || "",
-        turnover: document.getElementById('turnover')?.value || "",
-        gst: document.getElementById('gstCheck')?.value || "",
-        gstNumber: document.getElementById('gstNumber')?.value || ""
+        name: document.getElementById('formName').value,
+        phone: document.getElementById('formPhone').value,
+        loanType: document.getElementById('formType').value,
+        amount: document.getElementById('formAmt').value,
+        monthlyIncome: document.getElementById('monthlyIncome').value,
+        currentEMI: document.getElementById('currentEMI').value,
+        turnover: document.getElementById('turnover').value,
+        gst: document.getElementById('gstCheck').value,
+        gstNumber: document.getElementById('gstNumber').value
     };
 
     try {
         await fetch(SCRIPT_URL, {
-            method: 'POST',
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(payload)
         });
 
@@ -343,29 +364,16 @@
         status.style.background = "#d1fae5";
 
         this.reset();
+        toggleFormLogic();
 
-    } catch (err) {
-        status.innerText = "❌ Error submitting form";
+    } catch (error) {
+        status.innerText = "❌ Submission Failed";
         status.style.background = "#fee2e2";
     }
 
     btn.disabled = false;
 });
-=======
-            e.preventDefault();
-            const btn = document.getElementById('submitButton');
-            const status = document.getElementById('form-status');
-            btn.disabled = true; status.style.display = "block"; status.innerText = "Syncing with Drive...";
-            try {
-                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ name: document.getElementById('formName').value })});
-                status.innerText = "🚀 Success! We will call you shortly.";
-                status.style.background = "#d1fae5"; this.reset(); toggleFormLogic();
-            } catch (err) { status.innerText = "Submission successful!"; status.style.background = "#d1fae5"; }
-            finally { btn.disabled = false; }
-        });
 
-        runCalc();
-    </script>
-</body>
-</html>
->>>>>>> 2add5b5 (first commit)
+/* ================= INIT ================= */
+window.onload = runCalc;
+</script>
