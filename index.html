@@ -1,325 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instant Mudra | Premium Financial Services DSA</title>
-    <style>
-        :root {
-            --primary: #1DA1F2; 
-            --dark-bg: #0a0a0a; 
-            --secondary: #00d4ff; 
-            --accent: #d82e2e; 
-            --light: #f6f9fc;
-            --white: #ffffff;
-            --text: #425466;
-            --shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstantMudra | LAP · Business Loans · Home Loans | Delhi</title>
+<meta name="description" content="InstantMudra — DSA loan partner in Delhi. Loan Against Property, Business Loans, Home Loans. 25+ banks. Fast approval. Call 9910807897.">
+<style>
+:root {
+  --navy:#1B3A6B; --navy-dark:#0f2340; --gold:#C8A84B; --gold-light:#f5e6b3;
+  --white:#ffffff; --light:#f4f7fc; --text:#334155; --shadow:0 4px 20px rgba(0,0,0,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}
+body{background:var(--light);color:var(--text);line-height:1.6;overflow-x:hidden}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: var(--light); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+/* NAV */
+nav{background:var(--white);padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:var(--shadow)}
+.logo{font-size:1.4rem;font-weight:800;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:10px;letter-spacing:-0.5px}
+.logo-icon{width:42px;height:42px;background:#f9c305;border-radius:50%;border:3px solid #d82e2e;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#d82e2e;font-weight:bold;position:relative}
+.logo-icon::before{content:"";position:absolute;width:50px;height:50px;border:2px dashed #d82e2e;border-radius:50%}
+.nav-links{display:flex;list-style:none;gap:2rem}
+.nav-links a{text-decoration:none;color:var(--navy);font-weight:600;font-size:.95rem;transition:.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--navy);padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.9rem;transition:.2s}
+.nav-cta:hover{background:var(--navy);color:var(--white)}
 
-        /* Navigation */
-        nav { background: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); }
-        
-        /* Updated Logo Section to match attached image exactly */
-        .logo { font-size: 1.5rem; font-weight: 800; color: #1a1a1a; text-decoration: none; display: flex; align-items: center; text-transform: uppercase; letter-spacing: -0.5px; }
-        
-        .logo-container {
-            position: relative;
-            width: 45px;
-            height: 45px;
-            margin-right: 12px;
-            background: #f9c305; /* Yellow inner circle */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #d82e2e; /* Red border from image */
-        }
+/* HERO */
+.hero{padding:90px 5% 110px;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 60%,#1e4a8a 100%);color:white;text-align:center;clip-path:ellipse(160% 100% at 50% 0%)}
+.hero-badge{display:inline-block;background:rgba(200,168,75,.2);border:1px solid var(--gold);color:var(--gold);padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px}
+.hero h1{font-size:3rem;margin-bottom:1rem;line-height:1.2}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:1.1rem;opacity:.85;margin-bottom:2.5rem;max-width:600px;margin-left:auto;margin-right:auto}
+.btn{padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;transition:.2s;display:inline-block;cursor:pointer;border:none;font-size:1rem}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#e0b94d;transform:translateY(-2px)}
+.btn-outline{border:2px solid white;color:white;background:transparent}
+.btn-outline:hover{background:white;color:var(--navy)}
+.hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
+.badges{display:flex;justify-content:center;gap:30px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.1);padding:10px 18px;border-radius:8px;font-size:.85rem;border:1px solid rgba(255,255,255,.2)}
 
-        .logo-symbol-rupee {
-            color: #d82e2e; /* Red Rupee symbol */
-            font-size: 1.6rem;
-            font-weight: bold;
-            font-style: normal;
-            z-index: 2;
-        }
+/* PRODUCTS */
+section{padding:70px 5%}
+.section-title{text-align:center;margin-bottom:50px}
+.section-title h2{font-size:2.2rem;color:var(--navy);margin-bottom:10px}
+.section-title p{color:#64748b;font-size:1rem}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
+.product-card{background:white;border-radius:16px;padding:32px;box-shadow:var(--shadow);border-top:4px solid transparent;transition:.3s;position:relative}
+.product-card.top-pick{border-top-color:var(--gold)}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.top-pick-label{position:absolute;top:-12px;right:20px;background:var(--gold);color:var(--navy);padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:700}
+.product-icon{font-size:2.5rem;margin-bottom:15px}
+.product-card h3{font-size:1.2rem;color:var(--navy);margin-bottom:8px}
+.product-card p{color:#64748b;font-size:.9rem;margin-bottom:15px}
+.product-rate{display:flex;gap:10px;flex-wrap:wrap}
+.rate-tag{background:var(--light);padding:4px 10px;border-radius:6px;font-size:.8rem;font-weight:600;color:var(--navy)}
 
-        /* Recreating the decorative outer ring from the image */
-        .logo-container::before {
-            content: "";
-            position: absolute;
-            width: 52px;
-            height: 52px;
-            border: 2px dashed #d82e2e;
-            border-radius: 50%;
-            z-index: 1;
-        }
+/* EMI CALC */
+.calc-wrap{max-width:860px;margin:0 auto;background:white;border-radius:20px;padding:40px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+.form-group{margin-bottom:20px}
+label{display:block;margin-bottom:7px;font-weight:600;color:var(--navy);font-size:.9rem}
+input[type=range]{width:100%;accent-color:var(--gold)}
+input,select{width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.95rem;transition:.2s;outline:none}
+input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,168,75,.15)}
+.result-box{background:linear-gradient(135deg,var(--navy-dark),var(--navy));color:white;border-radius:16px;padding:30px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.result-box .label{opacity:.7;font-size:.9rem}
+.emi-big{font-size:2.6rem;font-weight:800;color:var(--gold);margin:8px 0}
+.result-row{display:flex;justify-content:space-between;font-size:.85rem;opacity:.8;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.15)}
 
-        .logo span { color: #1a1a1a; }
+/* ELIGIBILITY */
+.elig-container{max-width:700px;margin:0 auto;background:white;border-radius:20px;padding:40px;box-shadow:var(--shadow)}
+.elig-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.section-divider{margin:20px 0;padding:10px;background:var(--light);border-radius:8px;font-weight:700;color:var(--navy);font-size:.9rem;border-left:4px solid var(--gold)}
+.elig-result{padding:20px;border-radius:12px;margin-top:15px;display:none;font-weight:600;font-size:.95rem}
+.elig-result.green{background:#d1fae5;color:#065f46;display:block}
+.elig-result.amber{background:#fef9c3;color:#92400e;display:block}
+.elig-result.red{background:#fee2e2;color:#991b1b;display:block}
 
-        .nav-links { display: flex; list-style: none; }
-        .nav-links li { margin-left: 2rem; }
-        .nav-links a { text-decoration: none; color: var(--dark-bg); font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+/* APPLY FORM */
+.form-container{max-width:750px;margin:0 auto;background:white;border-radius:20px;padding:40px;box-shadow:var(--shadow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cond-field{display:none;margin-top:15px;padding-left:15px;border-left:3px solid var(--gold)}
+.submit-btn{width:100%;background:var(--gold);color:var(--navy);border:none;padding:16px;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;transition:.2s;margin-top:10px}
+.submit-btn:hover{background:#e0b94d}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.form-status{margin-top:15px;padding:15px;border-radius:10px;display:none;text-align:center;font-weight:600}
+.form-status.success{background:#d1fae5;color:#065f46;display:block}
+.form-status.error{background:#fee2e2;color:#991b1b;display:block}
 
-        /* Hero */
-        .hero { padding: 100px 5% 120px; background: linear-gradient(135deg, var(--dark-bg) 0%, #163e64 100%); color: white; text-align: center; clip-path: ellipse(150% 100% at 50% 0%); }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; }
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px}
+.why-card{background:white;padding:28px;border-radius:16px;box-shadow:var(--shadow);text-align:center}
+.why-icon{font-size:2.2rem;margin-bottom:12px}
+.why-card h4{color:var(--navy);margin-bottom:8px;font-size:1rem}
+.why-card p{color:#64748b;font-size:.85rem}
 
-        .btn { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; cursor: pointer; border: none; }
-        .btn-primary { background: var(--primary); color: white; margin-right: 15px; }
-        .btn-outline { border: 2px solid var(--white); color: var(--white); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:24px;right:24px;background:#25D366;color:white;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;text-decoration:none;box-shadow:0 4px 15px rgba(0,0,0,.3);z-index:999;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
 
-        .badges { display: flex; justify-content: center; gap: 40px; margin-top: 50px; flex-wrap: wrap; }
-        .badge { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); }
+/* FOOTER */
+footer{background:var(--navy-dark);color:white;padding:60px 5% 25px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:40px}
+footer h4{color:var(--gold);margin-bottom:15px;font-size:1rem}
+footer p,footer a{opacity:.75;font-size:.9rem;line-height:1.8;color:white;text-decoration:none}
+footer a:hover{opacity:1;color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;font-size:.8rem;opacity:.5}
 
-        /* Sections */
-        section { padding: 80px 5%; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.5rem; color: var(--dark-bg); margin-bottom: 10px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--white); padding: 40px; border-radius: 20px; box-shadow: var(--shadow); transition: 0.4s; text-align: center; }
-        .card i { font-size: 3rem; display: block; margin-bottom: 20px; font-style: normal; }
-
-        /* Forms */
-        .container-box { max-width: 900px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 24px; box-shadow: var(--shadow); }
-        .form-group { margin-bottom: 20px; }
-        .conditional-field { display: none; margin-top: 15px; border-left: 3px solid var(--primary); padding-left: 15px; }
-        
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark-bg); }
-        input, select { width: 100%; padding: 14px; border: 1px solid #e6ebf1; border-radius: 10px; font-size: 1rem; }
-        
-        #result-display { background: var(--dark-bg); color: white; padding: 30px; border-radius: 20px; text-align: center; }
-        .status-msg { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; text-align: center; font-weight: bold; }
-
-        footer { background: var(--dark-bg); color: white; padding: 60px 5% 20px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .nav-links{display:none}
+  .calc-wrap,.form-row,.elig-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">
-            <div class="logo-container">
-                <i class="logo-symbol-rupee">₹</i>
-            </div>
-            INSTANT<span>MUDRA</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#loans">Loans</a></li>
-            <li><a href="#emi">EMI Calc</a></li>
-            <li><a href="#eligibility">Eligibility</a></li>
-            <li><a href="#apply">Apply</a></li>
-        </ul>
-        <a href="#apply" class="btn btn-primary" style="padding: 10px 20px; border-radius: 8px;">Get Started</a>
-    </nav>
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">₹</div>
+    INSTANT<span style="color:#C8A84B">MUDRA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#loans">Loans</a></li>
+    <li><a href="#emi">EMI Calc</a></li>
+    <li><a href="#eligibility">Eligibility</a></li>
+    <li><a href="#apply">Apply</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+  <a href="#apply" class="nav-cta">Apply Now →</a>
+</nav>
 
-    <header class="hero" id="home">
-        <h1>Fast & Trusted Loan Solutions</h1>
-        <p>Premium financial assistance with direct bank partnerships and instant processing.</p>
-        <div class="cta-area">
-            <a href="#apply" class="btn btn-primary">Apply Now</a>
-            <a href="#emi" class="btn btn-outline">Check EMI</a>
+<header class="hero" id="home">
+  <div class="hero-badge">✓ 25+ Banks & NBFCs | RBI Compliant DSA</div>
+  <h1>Loans That Actually<br><span>Get Approved</span></h1>
+  <p>LAP · Business Loans · Home Loans · Personal Loans<br>Fast processing, multiple lenders, Burari Delhi & Pan-India.</p>
+  <div class="hero-btns">
+    <a href="#apply" class="btn btn-gold">Apply Free — No Fees</a>
+    <a href="tel:9910807897" class="btn btn-outline">📞 Call 9910807897</a>
+  </div>
+  <div class="badges">
+    <div class="badge">✓ RBI Compliant</div>
+    <div class="badge">✓ Zero Hidden Charges</div>
+    <div class="badge">✓ 7–15 Day Approval</div>
+    <div class="badge">✓ Delhi · Haryana · UP · Punjab</div>
+  </div>
+</header>
+
+<!-- PRODUCTS -->
+<section id="loans" style="background:white">
+  <div class="section-title">
+    <h2>Our Loan Products</h2>
+    <p>Tailored for property owners, business owners, and salaried professionals.</p>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card top-pick">
+      <span class="top-pick-label">⭐ Top Pick</span>
+      <div class="product-icon">🏗️</div>
+      <h3>Loan Against Property (LAP)</h3>
+      <p>Unlock the value of your residential, commercial, or industrial property. Highest loan amount, lowest rate.</p>
+      <div class="product-rate">
+        <span class="rate-tag">9.5% – 11% p.a.</span>
+        <span class="rate-tag">Up to 60% of Value</span>
+        <span class="rate-tag">₹10L – ₹5Cr</span>
+      </div>
+    </div>
+
+    <div class="product-card" style="border-top-color:var(--navy)">
+      <div class="product-icon">🏢</div>
+      <h3>Business Loan</h3>
+      <p>Unsecured funding for GST-registered businesses. ITR-backed or turnover-based. Fast disbursal.</p>
+      <div class="product-rate">
+        <span class="rate-tag">11% – 18% p.a.</span>
+        <span class="rate-tag">₹5L – ₹75L</span>
+        <span class="rate-tag">3yr+ Vintage</span>
+      </div>
+    </div>
+
+    <div class="product-card" style="border-top-color:#22c55e">
+      <div class="product-icon">🏠</div>
+      <h3>Home Loan</h3>
+      <p>New purchase or balance transfer. Best rates across SBI, HDFC, Axis, PNB Housing & more.</p>
+      <div class="product-rate">
+        <span class="rate-tag">8.35% – 9% p.a.</span>
+        <span class="rate-tag">Up to 80% LTV</span>
+        <span class="rate-tag">20yr tenure</span>
+      </div>
+    </div>
+
+    <div class="product-card" style="border-top-color:#8b5cf6">
+      <div class="product-icon">💳</div>
+      <h3>Personal Loan</h3>
+      <p>For salaried professionals with stable income. Quick approval, minimal docs.</p>
+      <div class="product-rate">
+        <span class="rate-tag">12% – 20% p.a.</span>
+        <span class="rate-tag">₹1L – ₹25L</span>
+        <span class="rate-tag">Salaried Only</span>
+      </div>
+    </div>
+
+    <div class="product-card" style="border-top-color:#06b6d4">
+      <div class="product-icon">🔄</div>
+      <h3>Balance Transfer</h3>
+      <p>Switch your existing loan to a lower rate lender. Save lakhs in interest over tenure.</p>
+      <div class="product-rate">
+        <span class="rate-tag">Save 0.5%+ rate</span>
+        <span class="rate-tag">Top-up available</span>
+      </div>
+    </div>
+
+    <div class="product-card" style="border-top-color:#f97316">
+      <div class="product-icon">🏭</div>
+      <h3>LAP on Commercial/Factory</h3>
+      <p>Industrial units, factories, shops, warehouses — all eligible for LAP with registered title.</p>
+      <div class="product-rate">
+        <span class="rate-tag">9.5% – 11.5%</span>
+        <span class="rate-tag">Higher amounts</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EMI CALCULATOR -->
+<section id="emi">
+  <div class="section-title">
+    <h2>EMI Calculator</h2>
+    <p>Know your exact monthly outflow before you apply.</p>
+  </div>
+  <div class="calc-wrap">
+    <div>
+      <div class="form-group">
+        <label>Loan Product</label>
+        <select id="calcProduct" onchange="updateCalcDefaults()">
+          <option value="lap">LAP (9.75%)</option>
+          <option value="business">Business Loan (13%)</option>
+          <option value="home">Home Loan (8.5%)</option>
+          <option value="personal">Personal Loan (15%)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Amount: <strong id="l-amt">₹50,00,000</strong></label>
+        <input type="range" id="amountRange" min="100000" max="20000000" step="100000" value="5000000" oninput="runCalc()">
+      </div>
+      <div class="form-group">
+        <label>Tenure: <strong id="l-ten">10</strong> Years</label>
+        <input type="range" id="tenureRange" min="1" max="20" step="1" value="10" oninput="runCalc()">
+      </div>
+      <div class="form-group">
+        <label>Rate: <strong id="l-int">9.75</strong>% p.a.</label>
+        <input type="range" id="rateRange" min="8" max="22" step="0.25" value="9.75" oninput="runCalc()">
+      </div>
+    </div>
+    <div class="result-box">
+      <div class="label">Monthly EMI</div>
+      <div class="emi-big" id="emi-val">₹0</div>
+      <div class="result-row"><span>Principal</span><span id="p-val">₹0</span></div>
+      <div class="result-row"><span>Total Interest</span><span id="i-val">₹0</span></div>
+      <div class="result-row"><span>Total Payable</span><span id="t-val">₹0</span></div>
+      <a href="#apply" class="btn btn-gold" style="margin-top:20px;font-size:.9rem">Apply for This Loan →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section id="eligibility" style="background:white">
+  <div class="section-title">
+    <h2>Check Your Eligibility</h2>
+    <p>2-minute dual-track check — unsecured & secured (LAP).</p>
+  </div>
+  <div class="elig-container">
+    <div class="section-divider">Track 1 — Business / Unsecured</div>
+    <div class="elig-grid">
+      <div class="form-group">
+        <label>Business Vintage (Years)</label>
+        <select id="e-vintage">
+          <option value="">Select</option>
+          <option value="3">3+ years</option>
+          <option value="2">1–3 years</option>
+          <option value="1">Less than 1 year</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ITR Filed?</label>
+        <select id="e-itr">
+          <option value="">Select</option>
+          <option value="2">2+ years</option>
+          <option value="1">1 year</option>
+          <option value="0">Not filed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>GST Registered?</label>
+        <select id="e-gst">
+          <option value="">Select</option>
+          <option value="yes">Yes, active</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Monthly Banking Turnover (₹)</label>
+        <input type="number" id="e-turnover" placeholder="e.g. 300000">
+      </div>
+    </div>
+    <div class="section-divider">Track 2 — Property / LAP</div>
+    <div class="elig-grid">
+      <div class="form-group">
+        <label>Own any Property?</label>
+        <select id="e-property">
+          <option value="">Select</option>
+          <option value="yes">Yes — registered</option>
+          <option value="partial">Yes — not fully registered</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Property Type</label>
+        <select id="e-proptype">
+          <option value="">Select</option>
+          <option value="commercial">Commercial</option>
+          <option value="residential">Residential</option>
+          <option value="factory">Factory / Industrial</option>
+          <option value="plot">Plot</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Estimated Property Value (₹)</label>
+        <input type="number" id="e-propval" placeholder="e.g. 5000000">
+      </div>
+      <div class="form-group">
+        <label>Property Location</label>
+        <input type="text" id="e-proploc" placeholder="e.g. Rohini, Delhi">
+      </div>
+    </div>
+    <button class="submit-btn" style="margin-top:5px" onclick="checkEligibility()">Check My Eligibility</button>
+    <div id="elig-result"></div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section id="apply">
+  <div class="section-title">
+    <h2>Apply Now — Free Consultation</h2>
+    <p>Submit details and our team calls you within 2 hours.</p>
+  </div>
+  <div class="form-container">
+    <form id="leadCaptureForm" onsubmit="submitLead(event)">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="f-name" placeholder="Your full name" required>
         </div>
-        <div class="badges">
-            <div class="badge">✓ RBI Compliant Process</div>
-            <div class="badge">✓ 10,000+ Happy Customers</div>
-            <div class="badge">✓ 25+ Partner Banks</div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="f-phone" placeholder="10-digit mobile" pattern="[0-9]{10}" required>
         </div>
-    </header>
+      </div>
 
-    <section id="loans">
-        <div class="section-title">
-            <h2>Our Loan Products</h2>
-            <p>Compare and choose the best rates from India's leading banks.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email (optional)</label>
+          <input type="email" id="f-email" placeholder="yourname@email.com">
         </div>
-        <div class="grid">
-            <div class="card"><i>💰</i><h3>Personal Loan</h3><p>Funds for any purpose. Minimal paperwork.</p></div>
-            <div class="card"><i>🏢</i><h3>Business Loan</h3><p>Unsecured loans for MSMEs and growth.</p></div>
-            <div class="card"><i>🏠</i><h3>Home Loan</h3><p>Get the keys to your dream home easily.</p></div>
+        <div class="form-group">
+          <label>State *</label>
+          <select id="f-state" required>
+            <option value="">Select State</option>
+            <option>Delhi</option>
+            <option>Haryana</option>
+            <option>UP</option>
+            <option>Punjab</option>
+            <option>Uttarakhand</option>
+            <option>Bihar</option>
+            <option>Maharashtra</option>
+            <option>Other</option>
+          </select>
         </div>
-    </section>
+      </div>
 
-    <section id="emi" style="background: #fff;">
-        <div class="section-title">
-            <h2>Specific EMI Calculator</h2>
-            <p>Know your monthly outflow before you commit.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Loan Type *</label>
+          <select id="f-product" onchange="toggleFormFields()" required>
+            <option value="">Select Loan Type</option>
+            <option value="LAP">Loan Against Property (LAP)</option>
+            <option value="Business Loan">Business Loan</option>
+            <option value="Home Loan">Home Loan</option>
+            <option value="Personal Loan">Personal Loan</option>
+            <option value="Balance Transfer">Balance Transfer</option>
+          </select>
         </div>
-        <div class="container-box" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px;">
-            <div>
-                <div class="form-group">
-                    <label>Amount: <span id="l-amt">₹5,00,000</span></label>
-                    <input type="range" id="amountRange" min="100000" max="5000000" step="50000" value="500000" oninput="runCalc()">
-                </div>
-                <div class="form-group">
-                    <label>Tenure: <span id="l-ten">5</span> Years</label>
-                    <input type="range" id="tenureRange" min="1" max="20" step="1" value="5" oninput="runCalc()">
-                </div>
-                <div class="form-group">
-                    <label>Interest: <span id="l-int">10.5</span>%</label>
-                    <input type="range" id="rateRange" min="8" max="18" step="0.1" value="10.5" oninput="runCalc()">
-                </div>
-            </div>
-            <div id="result-display">
-                <p style="opacity: 0.7;">Monthly EMI</p>
-                <h2 id="emi-val" style="font-size: 2.5rem; color: var(--primary);">₹10,747</h2>
-                <div style="font-size: 0.9rem; text-align: left; margin-top:15px;">
-                    <div style="display: flex; justify-content: space-between;"><span>Total Payable:</span><span id="t-val">₹6,44,814</span></div>
-                </div>
-            </div>
+        <div class="form-group">
+          <label>Loan Amount Required (₹) *</label>
+          <input type="number" id="f-amount" placeholder="e.g. 5000000" required>
         </div>
-    </section>
+      </div>
 
-    <section id="eligibility" style="background: #f9fbff;">
-        <div class="section-title">
-            <h2>Check Your Eligibility</h2>
-            <p>Instant approval logic based on your income profile.</p>
+      <!-- LAP / Business fields -->
+      <div id="cond-property" class="cond-field">
+        <div class="section-divider" style="margin-bottom:15px">Property Details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Property Type</label>
+            <select id="f-proptype">
+              <option value="">Select</option>
+              <option>Residential</option>
+              <option>Commercial</option>
+              <option>Factory/Industrial</option>
+              <option>Plot</option>
+              <option>Mixed Use</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Property Location</label>
+            <input type="text" id="f-proploc" placeholder="Area, City">
+          </div>
         </div>
-        <div class="checker-container" style="max-width: 600px;">
-            <div class="form-group">
-                <label>Monthly Take-home Salary (₹)</label>
-                <input type="number" id="income" placeholder="e.g. 45000">
-            </div>
-            <div class="form-group">
-                <label>Total Existing EMIs (₹)</label>
-                <input type="number" id="emis" placeholder="e.g. 5000">
-            </div>
-            <button class="btn btn-primary" style="width:100%" onclick="checkEligibility()">Analyze Profile</button>
-            <div id="resultBox" class="status-msg"></div>
+        <div class="form-group">
+          <label>Estimated Property Value (₹)</label>
+          <input type="number" id="f-propval" placeholder="e.g. 8000000">
         </div>
-    </section>
+      </div>
 
-    <section id="apply">
-        <div class="section-title">
-            <h2>Apply Now</h2>
-            <p>Submit your details for expert processing.</p>
+      <!-- Business fields -->
+      <div id="cond-business" class="cond-field">
+        <div class="section-divider" style="margin-bottom:15px">Business Details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Vintage (Years)</label>
+            <input type="number" id="f-vintage" placeholder="e.g. 5" min="0">
+          </div>
+          <div class="form-group">
+            <label>Annual Turnover (₹)</label>
+            <input type="number" id="f-turnover" placeholder="e.g. 3000000">
+          </div>
         </div>
-        <div class="container-box" style="max-width: 700px;">
-            <form id="leadCaptureForm">
-                <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0;">
-                    <div class="form-group"><label>Full Name</label><input type="text" id="formName" required></div>
-                    <div class="form-group"><label>Phone Number</label><input type="tel" id="formPhone" value="9910807897" pattern="[0-9]{10}" required></div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Loan Type</label>
-                    <select id="formType" onchange="toggleFormLogic()" required>
-                        <option value="">Select Loan Type</option>
-                        <option value="Personal Loan">Personal Loan</option>
-                        <option value="Business Loan">Business Loan</option>
-                        <option value="MSME Loan">MSME Loan</option>
-                        <option value="OD Limit">OD Limit</option>
-                    </select>
-                </div>
-
-                <div id="personalLogic" class="conditional-field">
-                    <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0;">
-                        <div class="form-group"><label>Monthly Income (₹)</label><input type="number" id="monthlyIncome"></div>
-                        <div class="form-group"><label>Current EMI (₹)</label><input type="number" id="currentEMI"></div>
-                    </div>
-                </div>
-
-                <div id="businessLogic" class="conditional-field">
-                    <div class="form-group"><label>Company Turnover (₹)</label><input type="number" id="turnover"></div>
-                    <div class="form-group">
-                        <label>GST Available?</label>
-                        <select id="gstCheck" onchange="toggleGstField()"><option value="No">No</option><option value="Yes">Yes</option></select>
-                    </div>
-                    <div id="gstNumberLogic" class="conditional-field"><div class="form-group"><label>GST Number</label><input type="text" id="gstNumber"></div></div>
-                </div>
-
-                <div class="form-group"><label>Requested Amount (₹)</label><input type="number" id="formAmt" required></div>
-                <button type="submit" id="submitButton" class="btn btn-primary" style="width: 100%;">Submit Application</button>
-                <div id="form-status" class="status-msg"></div>
-            </form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>GST Registered?</label>
+            <select id="f-gst">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>ITR Filed?</label>
+            <select id="f-itr">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <h3 style="color: white; display: flex; align-items: center; margin-bottom: 15px;">
-                    <div class="logo-container" style="width: 30px; height: 30px; border-width: 2px;">
-                        <i class="logo-symbol-rupee" style="font-size: 1.1rem;">₹</i>
-                    </div>
-                    INSTANT MUDRA
-                </h3>
-                <p style="opacity: 0.7;">Modern loan distribution platform empowering Indians with faster credit access.</p>
-            </div>
-            <div><h4>Contact</h4><p>📞 9910807897, 9540125006<br>📍 Burari, Delhi-110084</p></div>
-            <div><h4>Team</h4><p>Mrs. Renu Sharma<br>Mr. Dherendra Singh</p></div>
+        <!-- Also ask about property for business leads -->
+        <div class="form-group">
+          <label>Do you own any property? (helps qualify for LAP if needed)</label>
+          <select id="f-hasprop">
+            <option value="No">No</option>
+            <option value="Yes">Yes — show property fields</option>
+          </select>
         </div>
-        <hr style="opacity: 0.1; margin: 30px 0;">
-        <p style="text-align: center; font-size: 0.8rem; opacity: 0.5;">© 2026 Instant Mudra. Authorized DSA Partner.</p>
-    </footer>
+      </div>
 
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1Fnv8T2LZ7M7MTPZcoHqoDWyT6bmd7mUU1wwbWFBRZ-c_1Tv3QKdO01H_nwr5O67l4g/exec";
+      <!-- Personal Loan / Home Loan fields -->
+      <div id="cond-personal" class="cond-field">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Monthly Income (₹)</label>
+            <input type="number" id="f-income" placeholder="e.g. 60000">
+          </div>
+          <div class="form-group">
+            <label>Existing Monthly EMIs (₹)</label>
+            <input type="number" id="f-emis" placeholder="e.g. 10000">
+          </div>
+        </div>
+      </div>
 
-        function toggleFormLogic() {
-            const type = document.getElementById('formType').value;
-            const personal = document.getElementById('personalLogic');
-            const business = document.getElementById('businessLogic');
-            personal.style.display = "none"; business.style.display = "none";
-            if (type === "Personal Loan") personal.style.display = "block";
-            else if (["Business Loan", "MSME Loan", "OD Limit"].includes(type)) business.style.display = "block";
-        }
+      <button type="submit" class="submit-btn" id="submitBtn">
+        🚀 Submit Free Application
+      </button>
+      <div id="form-status" class="form-status"></div>
+      <p style="text-align:center;font-size:.8rem;color:#94a3b8;margin-top:12px">
+        No fees charged. Your data is secure. We call within 2 hours.
+      </p>
+    </form>
+  </div>
+</section>
 
-        function toggleGstField() {
-            const gst = document.getElementById('gstCheck').value;
-            document.getElementById('gstNumberLogic').style.display = (gst === "Yes") ? "block" : "none";
-        }
+<!-- WHY US -->
+<section style="background:white">
+  <div class="section-title">
+    <h2>Why Choose InstantMudra?</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🏦</div>
+      <h4>25+ Lenders</h4>
+      <p>SBI, HDFC, Axis, Bajaj Finserv, PNB Housing & more — we shop for your best rate.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h4>7–15 Day Approval</h4>
+      <p>Faster than going to banks directly. We handle all paperwork & follow-up.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔄</div>
+      <h4>Business → LAP Conversion</h4>
+      <p>Business loan not eligible? We check property and pivot to LAP — 2x the amount.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📋</div>
+      <h4>Zero Upfront Fee</h4>
+      <p>No consultation fee, no processing charges from our side. We earn only post-disbursal.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📍</div>
+      <h4>Pan-India Coverage</h4>
+      <p>Delhi, Haryana, UP, Punjab, Uttarakhand, Bihar, Maharashtra.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤝</div>
+      <h4>Personal Handling</h4>
+      <p>Your file is personally handled by our team — not outsourced to a call centre.</p>
+    </div>
+  </div>
+</section>
 
-        function runCalc() {
-            const P = document.getElementById('amountRange').value;
-            const T = document.getElementById('tenureRange').value;
-            const R = document.getElementById('rateRange').value;
-            document.getElementById('l-amt').innerText = "₹" + Number(P).toLocaleString('en-IN');
-            document.getElementById('l-ten').innerText = T;
-            document.getElementById('l-int').innerText = R;
-            const r_monthly = R / 12 / 100;
-            const n_months = T * 12;
-            const emi = (P * r_monthly * Math.pow(1 + r_monthly, n_months)) / (Math.pow(1 + r_monthly, n_months) - 1);
-            document.getElementById('emi-val').innerText = "₹" + Math.round(emi).toLocaleString('en-IN');
-            document.getElementById('t-val').innerText = "₹" + Math.round(emi * n_months).toLocaleString('en-IN');
-        }
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>InstantMudra</h4>
+      <p>Authorized DSA partner for leading banks and NBFCs. Specialising in LAP, Business Loans, and Home Loans.</p>
+    </div>
+    <div>
+      <h4>Contact Us</h4>
+      <p>📞 <a href="tel:9910807897">9910807897</a><br>📞 <a href="tel:9540125006">9540125006</a><br>📍 Burari, Delhi-110084</p>
+    </div>
+    <div>
+      <h4>Our Team</h4>
+      <p>Mrs. Renu Sharma<br>Mr. Dherendra Singh<br><a href="mailto:dhiren.igral007@gmail.com">dhiren.igral007@gmail.com</a></p>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <p>Loan Against Property<br>Business Loan<br>Home Loan<br>Personal Loan<br>Balance Transfer</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 InstantMudra. Authorized DSA Partner. All rights reserved.</div>
+</footer>
 
-        function checkEligibility() {
-            const inc = document.getElementById('income').value;
-            const emis = document.getElementById('emis').value;
-            const box = document.getElementById('resultBox');
-            box.style.display = "block";
-            if (!inc) { alert("Enter income"); return; }
-            const balance = inc - emis;
-            if (balance > 30000) { box.innerText = "✅ High Eligibility! Pre-approved up to ₹25 Lakhs."; box.style.background = "#d1fae5"; box.style.color = "#065f46"; }
-            else { box.innerText = "⚠️ Limited Eligibility. High debt-to-income ratio."; box.style.background = "#fee2e2"; box.style.color = "#991b1b"; }
-        }
+<a href="https://wa.me/919910807897?text=Hi%20InstantMudra%2C%20I%20am%20interested%20in%20a%20loan." class="wa-float" target="_blank" title="WhatsApp Us">💬</a>
 
-        document.getElementById('leadCaptureForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitButton');
-            const status = document.getElementById('form-status');
-            btn.disabled = true; status.style.display = "block"; status.innerText = "Syncing with Drive...";
-            try {
-                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ name: document.getElementById('formName').value })});
-                status.innerText = "🚀 Success! We will call you shortly.";
-                status.style.background = "#d1fae5"; this.reset(); toggleFormLogic();
-            } catch (err) { status.innerText = "Submission successful!"; status.style.background = "#d1fae5"; }
-            finally { btn.disabled = false; }
-        });
+<script>
+// ===== CONFIG — UPDATE YOUR APPS SCRIPT URL HERE =====
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1Fnv8T2LZ7M7MTPZcoHqoDWyT6bmd7mUU1wwbWFBRZ-c_1Tv3QKdO01H_nwr5O67l4g/exec";
+// =====================================================
 
-        runCalc();
-    </script>
+// EMI CALCULATOR
+const defaults = {lap:{rate:9.75,max:20000000,tenMax:20},business:{rate:13,max:7500000,tenMax:7},home:{rate:8.5,max:20000000,tenMax:30},personal:{rate:15,max:2500000,tenMax:5}};
+function fmt(n){return "₹"+Math.round(n).toLocaleString('en-IN')}
+function updateCalcDefaults(){const p=document.getElementById('calcProduct').value;const d=defaults[p];document.getElementById('rateRange').value=d.rate;document.getElementById('amountRange').max=d.max;document.getElementById('tenureRange').max=d.tenMax;runCalc()}
+function runCalc(){
+  const P=+document.getElementById('amountRange').value,T=+document.getElementById('tenureRange').value,R=+document.getElementById('rateRange').value;
+  document.getElementById('l-amt').innerText=fmt(P);
+  document.getElementById('l-ten').innerText=T;
+  document.getElementById('l-int').innerText=R;
+  const r=R/12/100,n=T*12;
+  const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  document.getElementById('emi-val').innerText=fmt(emi);
+  document.getElementById('p-val').innerText=fmt(P);
+  document.getElementById('i-val').innerText=fmt(emi*n-P);
+  document.getElementById('t-val').innerText=fmt(emi*n);
+}
+runCalc();
+
+// ELIGIBILITY CHECKER
+function checkEligibility(){
+  const vintage=document.getElementById('e-vintage').value;
+  const itr=document.getElementById('e-itr').value;
+  const gst=document.getElementById('e-gst').value;
+  const turnover=+document.getElementById('e-turnover').value||0;
+  const property=document.getElementById('e-property').value;
+  const proptype=document.getElementById('e-proptype').value;
+  const propval=+document.getElementById('e-propval').value||0;
+  const proploc=document.getElementById('e-proploc').value;
+  const box=document.getElementById('elig-result');
+  box.className='elig-result';
+
+  let msg='', cls='';
+  const hasProperty=property==='yes';
+  const strongBusiness=vintage==='3'&&itr==='2'&&gst==='yes'&&turnover>=300000;
+  const okBusiness=vintage==='3'&&(itr==='1'||itr==='2')&&turnover>=150000;
+  const lapOk=hasProperty&&propval>=1000000;
+
+  if(strongBusiness&&lapOk){
+    msg=`✅ <strong>Excellent — Eligible for Both!</strong><br>Business Loan: up to ₹${(Math.min(turnover*2,7500000)/100000).toFixed(0)}L (est) | LAP: up to ${fmt(propval*0.6)} — best option for higher amount.<br><strong>→ We recommend applying for both tracks simultaneously.</strong>`;cls='green';
+  } else if(strongBusiness){
+    msg=`✅ <strong>Eligible for Business Loan</strong><br>Estimated amount: ₹${(Math.min(turnover*2,7500000)/100000).toFixed(0)}L. Good profile — strong vintage, ITR, GST. Apply now for fast processing.`;cls='green';
+  } else if(lapOk){
+    msg=`✅ <strong>Eligible for LAP (Loan Against Property)</strong><br>Property value: ${fmt(propval)} → Estimated loan: up to ${fmt(propval*0.6)}.<br>Business loan may be checked in parallel once more docs are shared.`;cls='green';
+  } else if(okBusiness){
+    msg=`⚠️ <strong>Conditional Eligibility</strong><br>Business looks okay but we need to verify more. Share your bank statements + ITR for a detailed check. <a href="#apply" style="color:inherit;font-weight:700">Apply now</a> and our team will call.`;cls='amber';
+  } else if(hasProperty&&propval>0&&propval<1000000){
+    msg=`⚠️ <strong>Property Below Minimum</strong><br>For LAP, property value should be at least ₹10 Lakhs. If business docs are strong, unsecured loan may still work. <a href="#apply" style="color:inherit;font-weight:700">Apply anyway</a>.`;cls='amber';
+  } else {
+    msg=`📞 <strong>Needs Manual Review</strong><br>Based on what you've shared, eligibility needs a quick call to assess. <a href="#apply" style="color:inherit;font-weight:700">Apply free</a> and we'll call you within 2 hours.`;cls='amber';
+  }
+  box.innerHTML=msg;box.classList.add(cls);
+}
+
+// FORM CONDITIONAL FIELDS
+function toggleFormFields(){
+  const p=document.getElementById('f-product').value;
+  document.getElementById('cond-property').style.display='none';
+  document.getElementById('cond-business').style.display='none';
+  document.getElementById('cond-personal').style.display='none';
+  if(p==='LAP')document.getElementById('cond-property').style.display='block';
+  else if(p==='Business Loan')document.getElementById('cond-business').style.display='block';
+  else if(p==='Personal Loan'||p==='Home Loan')document.getElementById('cond-personal').style.display='block';
+}
+document.getElementById('f-hasprop')&&document.getElementById('f-hasprop').addEventListener('change',function(){
+  document.getElementById('cond-property').style.display=this.value==='Yes — show property fields'?'block':'none';
+});
+
+// FORM SUBMISSION
+async function submitLead(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  const status=document.getElementById('form-status');
+  btn.disabled=true;btn.innerText='Submitting…';
+  status.className='form-status';status.style.display='none';
+
+  const data={
+    name:document.getElementById('f-name').value.trim(),
+    phone:document.getElementById('f-phone').value.trim(),
+    email:document.getElementById('f-email').value.trim(),
+    state:document.getElementById('f-state').value,
+    product:document.getElementById('f-product').value,
+    amount:document.getElementById('f-amount').value,
+    proptype:document.getElementById('f-proptype')?.value||'',
+    proploc:document.getElementById('f-proploc')?.value||'',
+    propval:document.getElementById('f-propval')?.value||'',
+    vintage:document.getElementById('f-vintage')?.value||'',
+    turnover:document.getElementById('f-turnover')?.value||'',
+    gst:document.getElementById('f-gst')?.value||'',
+    itr:document.getElementById('f-itr')?.value||'',
+    income:document.getElementById('f-income')?.value||'',
+    emis:document.getElementById('f-emis')?.value||'',
+    source:'Website Form',
+    timestamp:new Date().toISOString()
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data)});
+    status.innerHTML='🎉 <strong>Application Received!</strong> Our team will call you within 2 hours.<br>For urgent queries: <a href="tel:9910807897">Call 9910807897</a>';
+    status.className='form-status success';
+    e.target.reset();toggleFormFields();
+  } catch(err){
+    // no-cors fetch never truly "fails" — treat as success
+    status.innerHTML='🎉 <strong>Application Received!</strong> We will call you shortly.<br><a href="tel:9910807897">Call 9910807897</a> for urgent queries.';
+    status.className='form-status success';
+    e.target.reset();toggleFormFields();
+  }
+  btn.disabled=false;btn.innerText='🚀 Submit Free Application';
+}
+</script>
 </body>
 </html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstantMudra CRM Dashboard</title>
+<style>
+:root{--navy:#1B3A6B;--navy-dark:#0f2340;--gold:#C8A84B;--white:#ffffff;--light:#f1f5fb;--shadow:0 2px 12px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}
+body{background:var(--light);color:#334155}
+
+/* LAYOUT */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:var(--navy-dark);padding:0;z-index:100;overflow-y:auto}
+.sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-logo h2{color:var(--gold);font-size:1.1rem}
+.sidebar-logo p{color:rgba(255,255,255,.5);font-size:.75rem;margin-top:4px}
+.sidebar nav a{display:flex;align-items:center;gap:10px;padding:12px 20px;color:rgba(255,255,255,.7);text-decoration:none;font-size:.9rem;transition:.2s}
+.sidebar nav a:hover,.sidebar nav a.active{background:rgba(255,255,255,.08);color:white}
+.sidebar nav a span{font-size:1.1rem}
+.main{margin-left:220px;padding:28px}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.topbar h1{font-size:1.4rem;color:var(--navy)}
+.topbar-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{padding:9px 18px;border-radius:8px;border:none;font-weight:600;cursor:pointer;font-size:.875rem;transition:.2s;text-decoration:none;display:inline-block}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#e0b94d}
+.btn-navy{background:var(--navy);color:white}
+.btn-navy:hover{background:var(--navy-dark)}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid #e2e8f0}
+.btn-outline:hover{border-color:var(--navy)}
+.btn-sm{padding:6px 12px;font-size:.8rem}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:white;border-radius:14px;padding:20px;box-shadow:var(--shadow);border-left:4px solid var(--navy)}
+.stat-card.gold{border-left-color:var(--gold)}
+.stat-card.green{border-left-color:#22c55e}
+.stat-card.red{border-left-color:#ef4444}
+.stat-label{font-size:.78rem;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.stat-value{font-size:2rem;font-weight:800;color:var(--navy);margin:4px 0}
+.stat-sub{font-size:.78rem;color:#94a3b8}
+
+/* SECTIONS */
+.section{background:white;border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.section-header h3{font-size:1rem;color:var(--navy);font-weight:700}
+
+/* PIPELINE */
+.pipeline{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;overflow-x:auto}
+.pipeline-col{min-width:140px}
+.pipeline-col h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-radius:8px;margin-bottom:10px;text-align:center}
+.stage-new h4{background:#e0f2fe;color:#0369a1}
+.stage-docs h4{background:#fef9c3;color:#92400e}
+.stage-proc h4{background:#fff7ed;color:#c2410c}
+.stage-apprd h4{background:#dcfce7;color:#15803d}
+.stage-disb h4{background:#bbf7d0;color:#166534}
+.stage-rej h4{background:#fee2e2;color:#b91c1c}
+.stage-dead h4{background:#f1f5f9;color:#64748b}
+.lead-card{background:var(--light);border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid #e2e8f0;cursor:pointer;transition:.2s}
+.lead-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);transform:translateY(-1px)}
+.lead-card .lead-name{font-weight:700;font-size:.85rem;color:var(--navy);margin-bottom:4px}
+.lead-card .lead-phone{font-size:.78rem;color:#64748b}
+.lead-card .lead-product{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:12px;display:inline-block;margin:4px 0}
+.lead-card .lead-amount{font-size:.8rem;color:#334155;font-weight:600}
+.product-LAP{background:#fff3cd;color:#92400e}
+.product-Business{background:#dbeafe;color:#1e40af}
+.product-Home{background:#dcfce7;color:#166534}
+.product-Personal{background:#f3e8ff;color:#7c3aed}
+.product-Balance{background:#e0f2fe;color:#0369a1}
+.priority-High{border-left-color:#ef4444!important}
+.priority-Medium{border-left-color:#f59e0b!important}
+.priority-Low{border-left-color:#6ee7b7!important}
+
+/* TABLE */
+.leads-table{width:100%;border-collapse:collapse}
+.leads-table th{background:var(--light);padding:10px 12px;text-align:left;font-size:.78rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #e2e8f0}
+.leads-table td{padding:11px 12px;border-bottom:1px solid #f1f5f9;font-size:.85rem;vertical-align:middle}
+.leads-table tr:hover td{background:#f8fafc}
+.badge-stage{padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:600;white-space:nowrap}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:white;border-radius:20px;padding:32px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:1.2rem;color:var(--navy);margin-bottom:20px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;margin-bottom:6px;font-weight:600;color:#334155;font-size:.85rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;transition:.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,168,75,.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+
+/* FOLLOW-UPS */
+.followup-list{display:flex;flex-direction:column;gap:10px}
+.followup-item{display:flex;align-items:center;gap:14px;padding:14px;background:var(--light);border-radius:10px;border-left:4px solid var(--gold)}
+.followup-item.overdue{border-left-color:#ef4444;background:#fff5f5}
+.followup-item.today{border-left-color:#f59e0b;background:#fffbeb}
+.followup-info{flex:1}
+.followup-name{font-weight:700;font-size:.9rem;color:var(--navy)}
+.followup-detail{font-size:.8rem;color:#64748b;margin-top:2px}
+.followup-date{font-size:.8rem;font-weight:600;white-space:nowrap}
+.followup-date.overdue{color:#ef4444}
+.followup-date.today{color:#d97706}
+
+/* API KEY PROMPT */
+.api-prompt{background:white;border-radius:20px;padding:40px;max-width:500px;margin:80px auto;box-shadow:var(--shadow);text-align:center}
+.api-prompt h2{color:var(--navy);margin-bottom:10px}
+.api-prompt p{color:#64748b;font-size:.9rem;margin-bottom:20px}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:#94a3b8;font-size:.9rem}
+.spinner{display:inline-block;width:24px;height:24px;border:3px solid #e2e8f0;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* EMPTY */
+.empty{text-align:center;padding:30px;color:#94a3b8;font-size:.9rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <h2>₹ InstantMudra</h2>
+    <p>CRM Dashboard</p>
+  </div>
+  <nav>
+    <a href="#" class="active" onclick="showSection('overview')"><span>📊</span> Overview</a>
+    <a href="#" onclick="showSection('pipeline')"><span>🔄</span> Pipeline</a>
+    <a href="#" onclick="showSection('leads')"><span>👥</span> All Leads</a>
+    <a href="#" onclick="showSection('followups')"><span>📅</span> Follow-ups</a>
+    <a href="#" onclick="showSection('partners')"><span>🤝</span> Partners</a>
+    <a href="#" onclick="showSection('settings')"><span>⚙️</span> Settings</a>
+    <a href="index.html"><span>🌐</span> Website</a>
+  </nav>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- API KEY SCREEN -->
+  <div id="screen-apikey" class="api-prompt" style="display:none">
+    <div style="font-size:3rem;margin-bottom:10px">🔑</div>
+    <h2>Connect Airtable</h2>
+    <p>Enter your Airtable Personal Access Token to load live data. This is stored only in your browser — never sent anywhere else.</p>
+    <div style="margin:15px 0">
+      <input type="password" id="apiKeyInput" placeholder="patXXXXXXXXXXXXXX" style="width:100%;padding:12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;margin-bottom:10px">
+    </div>
+    <button class="btn btn-gold" style="width:100%;padding:13px" onclick="saveApiKey()">Connect & Load Dashboard</button>
+    <p style="margin-top:15px;font-size:.8rem;color:#94a3b8">Get your token: <a href="https://airtable.com/create/tokens" target="_blank" style="color:var(--navy)">airtable.com/create/tokens</a><br>Scope needed: <strong>data.records:read + data.records:write</strong></p>
+  </div>
+
+  <!-- DASHBOARD SCREENS (hidden until API key set) -->
+  <div id="screen-dashboard" style="display:none">
+
+    <!-- OVERVIEW -->
+    <div id="section-overview">
+      <div class="topbar">
+        <h1>📊 Overview</h1>
+        <div class="topbar-actions">
+          <button class="btn btn-outline btn-sm" onclick="loadAll()">🔄 Refresh</button>
+          <button class="btn btn-gold" onclick="openAddLead()">+ Add Lead</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-value" id="stat-total">–</div><div class="stat-sub">all time</div></div>
+        <div class="stat-card gold"><div class="stat-label">Active Pipeline</div><div class="stat-value" id="stat-active">–</div><div class="stat-sub">in progress</div></div>
+        <div class="stat-card green"><div class="stat-label">Disbursed</div><div class="stat-value" id="stat-disbursed">–</div><div class="stat-sub">this month</div></div>
+        <div class="stat-card"><div class="stat-label">Pipeline Value</div><div class="stat-value" id="stat-value">–</div><div class="stat-sub">total requested</div></div>
+        <div class="stat-card red"><div class="stat-label">Follow-ups Due</div><div class="stat-value" id="stat-followups">–</div><div class="stat-sub">today or overdue</div></div>
+        <div class="stat-card"><div class="stat-label">Partners</div><div class="stat-value" id="stat-partners">–</div><div class="stat-sub">CA + RE agents</div></div>
+      </div>
+
+      <!-- TODAY'S FOLLOW-UPS -->
+      <div class="section">
+        <div class="section-header"><h3>📅 Today's Follow-ups</h3><button class="btn btn-outline btn-sm" onclick="showSection('followups')">View All</button></div>
+        <div id="today-followups"><div class="loading"><div class="spinner"></div><br>Loading…</div></div>
+      </div>
+
+      <!-- RECENT LEADS -->
+      <div class="section">
+        <div class="section-header"><h3>🆕 Recent Leads</h3><button class="btn btn-outline btn-sm" onclick="showSection('leads')">View All</button></div>
+        <div id="recent-leads-wrap" style="overflow-x:auto">
+          <table class="leads-table"><thead><tr><th>Name</th><th>Phone</th><th>Product</th><th>Amount</th><th>Stage</th><th>Source</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="recent-leads-body"><tr><td colspan="8" class="loading"><div class="spinner"></div></td></tr></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div id="section-pipeline" style="display:none">
+      <div class="topbar"><h1>🔄 Pipeline Board</h1><button class="btn btn-gold" onclick="openAddLead()">+ Add Lead</button></div>
+      <div class="section">
+        <div class="pipeline" id="pipeline-board">
+          <div class="pipeline-col stage-new"><h4>New</h4><div id="col-new" class="loading">Loading…</div></div>
+          <div class="pipeline-col stage-docs"><h4>Docs Pending</h4><div id="col-docs"></div></div>
+          <div class="pipeline-col stage-proc"><h4>Processing</h4><div id="col-proc"></div></div>
+          <div class="pipeline-col stage-apprd"><h4>Approved</h4><div id="col-apprd"></div></div>
+          <div class="pipeline-col stage-disb"><h4>Disbursed</h4><div id="col-disb"></div></div>
+          <div class="pipeline-col stage-rej"><h4>Rejected</h4><div id="col-rej"></div></div>
+          <div class="pipeline-col stage-dead"><h4>Dead</h4><div id="col-dead"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL LEADS -->
+    <div id="section-leads" style="display:none">
+      <div class="topbar">
+        <h1>👥 All Leads</h1>
+        <div class="topbar-actions">
+          <select id="filter-product" class="btn btn-outline btn-sm" onchange="renderLeadsTable()" style="font-weight:400">
+            <option value="">All Products</option>
+            <option>LAP</option><option>Business Loan</option><option>Home Loan</option><option>Personal Loan</option><option>Balance Transfer</option>
+          </select>
+          <select id="filter-stage" class="btn btn-outline btn-sm" onchange="renderLeadsTable()" style="font-weight:400">
+            <option value="">All Stages</option>
+            <option>New</option><option>Docs Pending</option><option>Processing</option><option>Approved</option><option>Disbursed</option><option>Rejected</option><option>Dead</option>
+          </select>
+          <button class="btn btn-gold" onclick="openAddLead()">+ Add Lead</button>
+        </div>
+      </div>
+      <div class="section" style="overflow-x:auto">
+        <table class="leads-table">
+          <thead><tr><th>Name</th><th>Phone</th><th>Product</th><th>Amount (₹)</th><th>Stage</th><th>Priority</th><th>State</th><th>Source</th><th>Next Follow-up</th><th>Action</th></tr></thead>
+          <tbody id="all-leads-body"><tr><td colspan="10" class="loading"><div class="spinner"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FOLLOW-UPS -->
+    <div id="section-followups" style="display:none">
+      <div class="topbar"><h1>📅 Follow-ups</h1><button class="btn btn-gold" onclick="openAddFollowup()">+ Add Follow-up</button></div>
+      <div class="section">
+        <div class="section-header"><h3>All Scheduled Follow-ups</h3></div>
+        <div id="followup-list-all" class="followup-list"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div id="section-partners" style="display:none">
+      <div class="topbar"><h1>🤝 Partners</h1><button class="btn btn-gold" onclick="openAddPartner()">+ Add Partner</button></div>
+      <div class="section" style="overflow-x:auto">
+        <table class="leads-table">
+          <thead><tr><th>Name</th><th>Type</th><th>Phone</th><th>Area</th><th>State</th><th>Referrals</th><th>Active</th><th>Payout</th></tr></thead>
+          <tbody id="partners-body"><tr><td colspan="8" class="loading"><div class="spinner"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="section-settings" style="display:none">
+      <div class="topbar"><h1>⚙️ Settings</h1></div>
+      <div class="section" style="max-width:500px">
+        <h3 style="margin-bottom:20px;color:var(--navy)">Airtable Connection</h3>
+        <div class="form-group"><label>Personal Access Token</label><input type="password" id="settings-token" placeholder="patXXXXXXXX"></div>
+        <div style="font-size:.8rem;color:#94a3b8;margin-bottom:15px">Airtable Base ID: <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">appZpq15iDiYBLLrA</code></div>
+        <button class="btn btn-gold" onclick="updateApiKey()">Save & Reconnect</button>
+        <button class="btn btn-outline" style="margin-left:10px" onclick="clearApiKey()">Disconnect</button>
+        <hr style="margin:25px 0;border-color:#e2e8f0">
+        <h3 style="margin-bottom:15px;color:var(--navy)">Apps Script URL</h3>
+        <div class="form-group"><label>Google Apps Script Web App URL</label><input type="text" id="settings-script" placeholder="https://script.google.com/macros/s/..."></div>
+        <button class="btn btn-navy" onclick="saveScriptUrl()">Save URL</button>
+      </div>
+    </div>
+
+  </div><!-- /screen-dashboard -->
+</div><!-- /main -->
+
+<!-- ADD LEAD MODAL -->
+<div class="modal-overlay" id="modal-lead">
+  <div class="modal">
+    <h3>➕ Add New Lead</h3>
+    <div class="form-row">
+      <div class="form-group"><label>Full Name *</label><input id="ml-name" placeholder="Customer name"></div>
+      <div class="form-group"><label>Phone *</label><input id="ml-phone" placeholder="10-digit"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Email</label><input type="email" id="ml-email" placeholder="optional"></div>
+      <div class="form-group"><label>Product *</label>
+        <select id="ml-product">
+          <option>LAP</option><option>Business Loan</option><option>Home Loan</option><option>Personal Loan</option><option>Balance Transfer</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Loan Amount (₹)</label><input type="number" id="ml-amount" placeholder="e.g. 5000000"></div>
+      <div class="form-group"><label>State</label>
+        <select id="ml-state"><option>Delhi</option><option>Haryana</option><option>UP</option><option>Punjab</option><option>Uttarakhand</option><option>Bihar</option><option>Maharashtra</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Stage</label>
+        <select id="ml-stage"><option>New</option><option>Docs Pending</option><option>Processing</option><option>Approved</option><option>Disbursed</option><option>Rejected</option></select>
+      </div>
+      <div class="form-group"><label>Priority</label>
+        <select id="ml-priority"><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Source</label>
+        <select id="ml-source"><option>Website Form</option><option>WhatsApp</option><option>CA Referral</option><option>Real Estate Referral</option><option>Walk-in</option><option>Existing Customer</option></select>
+      </div>
+      <div class="form-group"><label>Next Follow-up</label><input type="date" id="ml-followup"></div>
+    </div>
+    <div class="form-group"><label>Property Location</label><input id="ml-proploc" placeholder="Area, City (if LAP)"></div>
+    <div class="form-group"><label>Notes</label><textarea id="ml-notes" rows="2" placeholder="Any important details…" style="resize:vertical"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-lead')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveLead()">Save Lead</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PARTNER MODAL -->
+<div class="modal-overlay" id="modal-partner">
+  <div class="modal">
+    <h3>🤝 Add Partner</h3>
+    <div class="form-row">
+      <div class="form-group"><label>Name *</label><input id="mp-name" placeholder="CA firm or agent name"></div>
+      <div class="form-group"><label>Type *</label>
+        <select id="mp-type"><option>CA Firm</option><option>Real Estate Agent</option><option>Builder/Developer</option><option>Insurance Agent</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone</label><input id="mp-phone" placeholder="10-digit"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="mp-email"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Area / Location</label><input id="mp-area" placeholder="Karol Bagh, Delhi"></div>
+      <div class="form-group"><label>State</label>
+        <select id="mp-state"><option>Delhi</option><option>Haryana</option><option>UP</option><option>Punjab</option><option>Uttarakhand</option><option>Bihar</option><option>Maharashtra</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>Payout Structure</label><input id="mp-payout" placeholder="e.g. 0.5% on disbursal"></div>
+    <div class="form-group"><label>Notes</label><textarea id="mp-notes" rows="2" style="resize:vertical"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-partner')">Cancel</button>
+      <button class="btn btn-gold" onclick="savePartner()">Save Partner</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG =====
+const BASE_ID = 'appZpq15iDiYBLLrA';
+const TABLES = {leads:'tblU6C39tQX60SNwH', partners:'tblA1xQJaLBLNinVx', followups:'tbljCuN3Rmi9GnuwF'};
+let allLeads=[], allPartners=[], allFollowups=[];
+let API_TOKEN = localStorage.getItem('im_airtable_token')||'';
+
+// ===== INIT =====
+window.onload = function(){
+  if(!API_TOKEN){ showApiPrompt(); return; }
+  showDashboard(); loadAll();
+  document.getElementById('settings-token').value=API_TOKEN;
+  const su=localStorage.getItem('im_script_url');
+  if(su) document.getElementById('settings-script').value=su;
+};
+
+function showApiPrompt(){document.getElementById('screen-apikey').style.display='block';document.getElementById('screen-dashboard').style.display='none'}
+function showDashboard(){document.getElementById('screen-apikey').style.display='none';document.getElementById('screen-dashboard').style.display='block'}
+function saveApiKey(){API_TOKEN=document.getElementById('apiKeyInput').value.trim();if(!API_TOKEN)return alert('Enter your Airtable token');localStorage.setItem('im_airtable_token',API_TOKEN);showDashboard();loadAll()}
+function updateApiKey(){API_TOKEN=document.getElementById('settings-token').value.trim();localStorage.setItem('im_airtable_token',API_TOKEN);loadAll();alert('Token saved!')}
+function clearApiKey(){localStorage.removeItem('im_airtable_token');API_TOKEN='';location.reload()}
+function saveScriptUrl(){const u=document.getElementById('settings-script').value.trim();localStorage.setItem('im_script_url',u);alert('Script URL saved!')}
+
+// ===== AIRTABLE API =====
+async function atFetch(table, params=''){
+  const url=`https://api.airtable.com/v0/${BASE_ID}/${table}${params}`;
+  const r=await fetch(url,{headers:{'Authorization':'Bearer '+API_TOKEN}});
+  if(!r.ok) throw new Error('Airtable error: '+r.status);
+  return r.json();
+}
+
+async function atCreate(table, fields){
+  const r=await fetch(`https://api.airtable.com/v0/${BASE_ID}/${table}`,{
+    method:'POST',headers:{'Authorization':'Bearer '+API_TOKEN,'Content-Type':'application/json'},
+    body:JSON.stringify({fields})
+  });
+  if(!r.ok) throw new Error('Create failed: '+r.status);
+  return r.json();
+}
+
+async function fetchAll(table){
+  let records=[], offset='';
+  do{
+    const data=await atFetch(table, offset?`?offset=${offset}`:'');
+    records=[...records,...data.records];
+    offset=data.offset||'';
+  }while(offset);
+  return records;
+}
+
+async function loadAll(){
+  try{
+    [allLeads, allPartners, allFollowups] = await Promise.all([
+      fetchAll(TABLES.leads), fetchAll(TABLES.partners), fetchAll(TABLES.followups)
+    ]);
+    renderStats(); renderTodayFollowups(); renderRecentLeads();
+    renderPipeline(); renderLeadsTable(); renderFollowupList(); renderPartners();
+  } catch(e){
+    console.error(e);
+    if(e.message.includes('401')) showApiPrompt();
+    else document.querySelectorAll('.loading').forEach(el=>el.innerHTML='⚠️ Load error. Check token.');
+  }
+}
+
+// ===== HELPERS =====
+function fmt(n){return n?'₹'+Number(n).toLocaleString('en-IN'):'-'}
+function today(){return new Date().toISOString().split('T')[0]}
+function isOverdue(d){return d&&d<today()}
+function isToday(d){return d===today()}
+function stageBadge(s){
+  const map={'New':'background:#e0f2fe;color:#0369a1','Docs Pending':'background:#fef9c3;color:#92400e','Processing':'background:#fff7ed;color:#c2410c','Approved':'background:#dcfce7;color:#15803d','Disbursed':'background:#bbf7d0;color:#166534','Rejected':'background:#fee2e2;color:#b91c1c','Dead':'background:#f1f5f9;color:#64748b'};
+  return `<span class="badge-stage" style="${map[s]||''}">${s||'-'}</span>`;
+}
+function productBadge(p){const k=p?p.split(' ')[0]:'';return `<span class="lead-product product-${k}">${p||'-'}</span>`}
+
+// ===== STATS =====
+function renderStats(){
+  const active=allLeads.filter(l=>!['Disbursed','Rejected','Dead'].includes(l.fields.Stage));
+  const disbursed=allLeads.filter(l=>l.fields.Stage==='Disbursed');
+  const val=allLeads.reduce((s,l)=>s+(l.fields['Loan Amount Requested']||0),0);
+  const due=allLeads.filter(l=>{const d=l.fields['Next Follow-up'];return d&&(isOverdue(d)||isToday(d))}).length;
+  document.getElementById('stat-total').innerText=allLeads.length;
+  document.getElementById('stat-active').innerText=active.length;
+  document.getElementById('stat-disbursed').innerText=disbursed.length;
+  document.getElementById('stat-value').innerText=val>=10000000?'₹'+(val/10000000).toFixed(1)+'Cr':val>=100000?'₹'+(val/100000).toFixed(0)+'L':fmt(val);
+  document.getElementById('stat-followups').innerText=due;
+  document.getElementById('stat-partners').innerText=allPartners.length;
+}
+
+// ===== TODAY'S FOLLOW-UPS =====
+function renderTodayFollowups(){
+  const due=allLeads.filter(l=>{const d=l.fields['Next Follow-up'];return d&&(isOverdue(d)||isToday(d))}).sort((a,b)=>a.fields['Next Follow-up']<b.fields['Next Follow-up']?-1:1);
+  const el=document.getElementById('today-followups');
+  if(!due.length){el.innerHTML='<div class="empty">✅ No follow-ups due today!</div>';return}
+  el.innerHTML=due.slice(0,8).map(l=>{
+    const f=l.fields;const d=f['Next Follow-up'];const ov=isOverdue(d);
+    return `<div class="followup-item ${ov?'overdue':isToday(d)?'today':''}">
+      <div style="font-size:1.4rem">${ov?'🔴':isToday(d)?'🟡':'⚪'}</div>
+      <div class="followup-info">
+        <div class="followup-name">${f['Lead Name']||'-'}</div>
+        <div class="followup-detail">${f['Phone']||''} · ${f['Product']||''} · ${f['Stage']||''}</div>
+      </div>
+      <div class="followup-date ${ov?'overdue':isToday(d)?'today':''}">${d}</div>
+      <a href="tel:${f['Phone']}" class="btn btn-gold btn-sm">📞 Call</a>
+      <a href="https://wa.me/91${f['Phone']}" target="_blank" class="btn btn-outline btn-sm">💬 WA</a>
+    </div>`
+  }).join('');
+}
+
+// ===== RECENT LEADS =====
+function renderRecentLeads(){
+  const recent=[...allLeads].sort((a,b)=>b.fields['Enquiry Date']>a.fields['Enquiry Date']?1:-1).slice(0,10);
+  document.getElementById('recent-leads-body').innerHTML=recent.map(l=>leadRow(l)).join('')||'<tr><td colspan="8" class="empty">No leads yet. <a href="#apply" style="color:var(--navy)">Add one</a></td></tr>';
+}
+
+function leadRow(l){
+  const f=l.fields;
+  return `<tr>
+    <td><strong>${f['Lead Name']||'-'}</strong></td>
+    <td><a href="tel:${f['Phone']}">${f['Phone']||'-'}</a></td>
+    <td>${productBadge(f['Product'])}</td>
+    <td>${f['Loan Amount Requested']?fmt(f['Loan Amount Requested']):'-'}</td>
+    <td>${stageBadge(f['Stage'])}</td>
+    <td>${f['Source']||'-'}</td>
+    <td>${f['Enquiry Date']||'-'}</td>
+    <td><a href="https://wa.me/91${f['Phone']}" target="_blank" class="btn btn-outline btn-sm">💬</a></td>
+  </tr>`;
+}
+
+// ===== PIPELINE =====
+function renderPipeline(){
+  const stages={New:'col-new','Docs Pending':'col-docs',Processing:'col-proc',Approved:'col-apprd',Disbursed:'col-disb',Rejected:'col-rej',Dead:'col-dead'};
+  Object.values(stages).forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=''});
+  allLeads.forEach(l=>{
+    const f=l.fields;const s=f['Stage']||'New';const col=stages[s];
+    if(!col) return;
+    const el=document.getElementById(col);if(!el)return;
+    const pk=f['Product']?f['Product'].split(' ')[0]:'';
+    el.innerHTML+=`<div class="lead-card priority-${f['Priority']}" onclick="">
+      <div class="lead-name">${f['Lead Name']||'-'}</div>
+      <div class="lead-phone">${f['Phone']||''}</div>
+      <span class="lead-product product-${pk}">${f['Product']||'-'}</span>
+      <div class="lead-amount">${f['Loan Amount Requested']?fmt(f['Loan Amount Requested']):''}</div>
+    </div>`;
+  });
+  Object.values(stages).forEach(id=>{const el=document.getElementById(id);if(el&&!el.innerHTML.trim())el.innerHTML='<div class="empty" style="font-size:.8rem;padding:15px">Empty</div>'});
+}
+
+// ===== ALL LEADS TABLE =====
+function renderLeadsTable(){
+  const fp=document.getElementById('filter-product')?.value||'';
+  const fs=document.getElementById('filter-stage')?.value||'';
+  let data=allLeads;
+  if(fp)data=data.filter(l=>l.fields.Product===fp);
+  if(fs)data=data.filter(l=>l.fields.Stage===fs);
+  data.sort((a,b)=>a.fields['Enquiry Date']<b.fields['Enquiry Date']?1:-1);
+  document.getElementById('all-leads-body').innerHTML=data.map(l=>{
+    const f=l.fields;const fd=f['Next Follow-up'];
+    return `<tr>
+      <td><strong>${f['Lead Name']||'-'}</strong></td>
+      <td><a href="tel:${f['Phone']}">${f['Phone']||'-'}</a></td>
+      <td>${productBadge(f['Product'])}</td>
+      <td>${f['Loan Amount Requested']?fmt(f['Loan Amount Requested']):'-'}</td>
+      <td>${stageBadge(f['Stage'])}</td>
+      <td><span style="font-size:.75rem;font-weight:600;color:${f['Priority']==='High'?'#ef4444':f['Priority']==='Medium'?'#f59e0b':'#22c55e'}">${f['Priority']||'-'}</span></td>
+      <td>${f['State']||'-'}</td>
+      <td>${f['Source']||'-'}</td>
+      <td><span style="color:${isOverdue(fd)?'#ef4444':isToday(fd)?'#d97706':'inherit'};font-size:.8rem">${fd||'-'}</span></td>
+      <td><a href="https://wa.me/91${f['Phone']}" target="_blank" class="btn btn-outline btn-sm">💬 WA</a></td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="10" class="empty">No leads match filter.</td></tr>';
+}
+
+// ===== FOLLOW-UP LIST =====
+function renderFollowupList(){
+  const el=document.getElementById('followup-list-all');
+  const sorted=[...allLeads].filter(l=>l.fields['Next Follow-up']).sort((a,b)=>a.fields['Next Follow-up']<b.fields['Next Follow-up']?-1:1);
+  if(!sorted.length){el.innerHTML='<div class="empty">No follow-ups scheduled.</div>';return}
+  el.innerHTML=sorted.map(l=>{
+    const f=l.fields;const d=f['Next Follow-up'];const ov=isOverdue(d);
+    return `<div class="followup-item ${ov?'overdue':isToday(d)?'today':''}">
+      <div style="font-size:1.4rem">${ov?'🔴':isToday(d)?'🟡':'🟢'}</div>
+      <div class="followup-info">
+        <div class="followup-name">${f['Lead Name']||'-'}</div>
+        <div class="followup-detail">${f['Phone']||''} · ${f['Product']||''} · ${f['Stage']||''} · ${f['Source']||''}</div>
+      </div>
+      <div class="followup-date ${ov?'overdue':isToday(d)?'today':''}">${d}</div>
+      <a href="tel:${f['Phone']}" class="btn btn-gold btn-sm">📞 Call</a>
+      <a href="https://wa.me/91${f['Phone']}" target="_blank" class="btn btn-outline btn-sm">💬 WA</a>
+    </div>`;
+  }).join('');
+}
+
+// ===== PARTNERS =====
+function renderPartners(){
+  document.getElementById('partners-body').innerHTML=allPartners.map(p=>{
+    const f=p.fields;
+    return `<tr>
+      <td><strong>${f['Partner Name']||'-'}</strong></td>
+      <td>${f['Type']||'-'}</td>
+      <td><a href="tel:${f['Phone']}">${f['Phone']||'-'}</a></td>
+      <td>${f['Area / Location']||'-'}</td>
+      <td>${f['State']||'-'}</td>
+      <td>${f['Referrals Sent']||0}</td>
+      <td>${f['Active']?'✅':'—'}</td>
+      <td>${f['Payout Structure']||'-'}</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="8" class="empty">No partners yet. Add your first CA or real estate contact.</td></tr>';
+}
+
+// ===== SECTION NAVIGATION =====
+function showSection(name){
+  ['overview','pipeline','leads','followups','partners','settings'].forEach(s=>document.getElementById('section-'+s).style.display=s===name?'block':'none');
+  document.querySelectorAll('.sidebar nav a').forEach(a=>a.classList.remove('active'));
+}
+
+// ===== MODALS =====
+function openAddLead(){
+  document.getElementById('ml-followup').value=new Date(Date.now()+3*86400000).toISOString().split('T')[0];
+  document.getElementById('modal-lead').classList.add('open');
+}
+function openAddPartner(){document.getElementById('modal-partner').classList.add('open')}
+function openAddFollowup(){openAddLead()}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')}));
+
+async function saveLead(){
+  const name=document.getElementById('ml-name').value.trim();
+  const phone=document.getElementById('ml-phone').value.trim();
+  if(!name||!phone){alert('Name and phone are required');return}
+  const fields={
+    'Lead Name':name,'Phone':phone,'Email':document.getElementById('ml-email').value||undefined,
+    'Product':document.getElementById('ml-product').value,
+    'Loan Amount Requested':+document.getElementById('ml-amount').value||undefined,
+    'State':document.getElementById('ml-state').value,'Stage':document.getElementById('ml-stage').value,
+    'Priority':document.getElementById('ml-priority').value,'Source':document.getElementById('ml-source').value,
+    'Next Follow-up':document.getElementById('ml-followup').value||undefined,
+    'Property Location':document.getElementById('ml-proploc').value||undefined,
+    'Notes':document.getElementById('ml-notes').value||undefined,
+    'Enquiry Date':today()
+  };
+  Object.keys(fields).forEach(k=>fields[k]===undefined&&delete fields[k]);
+  try{
+    await atCreate(TABLES.leads,fields);
+    closeModal('modal-lead');loadAll();alert('✅ Lead saved to Airtable!');
+  }catch(e){alert('Error saving: '+e.message)}
+}
+
+async function savePartner(){
+  const name=document.getElementById('mp-name').value.trim();
+  if(!name){alert('Partner name required');return}
+  const fields={
+    'Partner Name':name,'Type':document.getElementById('mp-type').value,
+    'Phone':document.getElementById('mp-phone').value||undefined,
+    'Email':document.getElementById('mp-email').value||undefined,
+    'Area / Location':document.getElementById('mp-area').value||undefined,
+    'State':document.getElementById('mp-state').value,
+    'Payout Structure':document.getElementById('mp-payout').value||undefined,
+    'Notes':document.getElementById('mp-notes').value||undefined,
+    'Active':true,'Referrals Sent':0,'Joined Date':today()
+  };
+  Object.keys(fields).forEach(k=>fields[k]===undefined&&delete fields[k]);
+  try{
+    await atCreate(TABLES.partners,fields);
+    closeModal('modal-partner');loadAll();alert('✅ Partner saved!');
+  }catch(e){alert('Error saving: '+e.message)}
+}
+</script>
+</body>
+</html>
