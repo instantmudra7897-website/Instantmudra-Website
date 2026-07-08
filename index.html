@@ -35,10 +35,9 @@
   "sameAs": []
 }
 </script>
-<!-- TODO ANALYTICS: paste your GA4 snippet here (replace G-XXXXXXXXXX) and uncomment
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
--->
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8G6S4396RX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-8G6S4396RX');</script>
 <!-- TODO ANALYTICS: Microsoft Clarity — replace CLARITY_ID and uncomment
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","CLARITY_ID");</script>
 -->
@@ -755,6 +754,7 @@ async function submitLead(e){
 
   try {
     await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(data)});
+    if(typeof gtag==='function')gtag('event','generate_lead',{loan_type:data.product,lead_source:data.source,value:Number(data.amount)||0,currency:'INR'});
     status.innerHTML='🎉 <strong>Application Received!</strong> Our team will call you within 2 hours.<br>For urgent queries: <a href="tel:9910807897">Call 9910807897</a>';
     status.className='form-status success';
     e.target.reset();toggleFormFields();
