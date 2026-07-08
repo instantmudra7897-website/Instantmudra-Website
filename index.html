@@ -5,6 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InstantMudra | LAP · Business Loans · Home Loans | Delhi</title>
 <meta name="description" content="InstantMudra — DSA loan partner in Delhi. Loan Against Property, Business Loans, Home Loans. 25+ banks. Fast approval. Call 9910807897.">
+<link rel="canonical" href="https://instantmudra7897-website.github.io/Instantmudra-Website/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1B3A6B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23f9c305' stroke='%23d82e2e' stroke-width='6'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23d82e2e' font-family='Arial' font-weight='bold'%3E%E2%82%B9%3C/text%3E%3C/svg%3E">
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="InstantMudra | LAP · Business Loans · Home Loans | Delhi">
+<meta property="og:description" content="DSA loan partner in Delhi. 25+ banks &amp; NBFCs. LAP, Business, Home &amp; Personal Loans. Zero upfront fees. Call 9910807897.">
+<meta property="og:url" content="https://instantmudra7897-website.github.io/Instantmudra-Website/">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary">
+<!-- Structured Data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "InstantMudra",
+  "description": "Authorized DSA loan partner: Loan Against Property, Business Loans, Home Loans, Personal Loans. 25+ banks and NBFCs.",
+  "url": "https://instantmudra7897-website.github.io/Instantmudra-Website/",
+  "telephone": "+919910807897",
+  "email": "dhiren.igral007@gmail.com",
+  "address": {"@type": "PostalAddress", "addressLocality": "Burari", "addressRegion": "Delhi", "postalCode": "110084", "addressCountry": "IN"},
+  "areaServed": ["Delhi","Haryana","Uttar Pradesh","Punjab","Uttarakhand","Bihar","Maharashtra"],
+  "priceRange": "Free consultation",
+  "sameAs": []
+}
+</script>
+<!-- TODO ANALYTICS: paste your GA4 snippet here (replace G-XXXXXXXXXX) and uncomment
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<!-- TODO ANALYTICS: Microsoft Clarity — replace CLARITY_ID and uncomment
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","CLARITY_ID");</script>
+-->
 <style>
 :root {
   --navy:#1B3A6B; --navy-dark:#0f2340; --gold:#C8A84B; --gold-light:#f5e6b3;
@@ -107,9 +141,14 @@ footer a:hover{opacity:1;color:var(--gold)}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;font-size:.8rem;opacity:.5}
 
 /* RESPONSIVE */
+.menu-toggle{display:none;background:none;border:none;font-size:1.7rem;color:var(--navy);cursor:pointer;line-height:1}
 @media(max-width:768px){
   .hero h1{font-size:2rem}
-  .nav-links{display:none}
+  .menu-toggle{display:block}
+  nav{flex-wrap:wrap}
+  .nav-links{display:none;flex-direction:column;gap:0;width:100%;order:3;padding-top:10px}
+  .nav-links.open{display:flex}
+  .nav-links li{padding:11px 0;border-bottom:1px solid #eef2f7}
   .calc-wrap,.form-row,.elig-grid{grid-template-columns:1fr}
 }
 </style>
@@ -128,7 +167,10 @@ footer a:hover{opacity:1;color:var(--gold)}
     <li><a href="#apply">Apply</a></li>
     <li><a href="dashboard.html">Dashboard</a></li>
   </ul>
-  <a href="#apply" class="nav-cta">Apply Now →</a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a href="#apply" class="nav-cta">Apply Now →</a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+  </div>
 </nav>
 
 <header class="hero" id="home">
@@ -556,6 +598,39 @@ footer a:hover{opacity:1;color:var(--gold)}
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby2pdRiP9MNe5wbD52gdLVmM9mKEYUDZdWZftuUcn-_vLEIhzBkI-AmfFFY9mDW7Ea2fg/exec";
 // =====================================================
 
+// MOBILE MENU
+function toggleMenu(btn){
+  const nl=document.querySelector('.nav-links');
+  const open=nl.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open);
+}
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+  document.querySelector('.nav-links').classList.remove('open');
+}));
+
+// MARKETING ATTRIBUTION (UTM / referrer capture, persists for the session)
+(function(){
+  const p=new URLSearchParams(location.search);
+  ['utm_source','utm_medium','utm_campaign','gclid'].forEach(k=>{
+    if(p.get(k))sessionStorage.setItem('im_'+k,p.get(k));
+  });
+  if(!sessionStorage.getItem('im_referrer')&&document.referrer&&!document.referrer.includes(location.hostname)){
+    sessionStorage.setItem('im_referrer',document.referrer);
+  }
+})();
+function getAttribution(){
+  const g=k=>sessionStorage.getItem('im_'+k)||'';
+  const ref=g('referrer');
+  let source='Website Direct';
+  if(g('gclid'))source='Google Ads';
+  else if(g('utm_source'))source='Campaign: '+g('utm_source');
+  else if(/justdial/i.test(ref))source='JustDial';
+  else if(/google\./i.test(ref))source='Google Organic';
+  else if(/sulekha|sumantra/i.test(ref))source='Sumantra';
+  else if(ref)source='Referral: '+ref.replace(/^https?:\/\//,'').split('/')[0];
+  return {source, utm_source:g('utm_source'), utm_medium:g('utm_medium'), utm_campaign:g('utm_campaign'), gclid:g('gclid'), referrer:ref};
+}
+
 // EMI CALCULATOR
 const defaults = {lap:{rate:9.75,max:20000000,tenMax:20},business:{rate:13,max:7500000,tenMax:7},home:{rate:8.5,max:20000000,tenMax:30},personal:{rate:15,max:2500000,tenMax:5}};
 function fmt(n){return "₹"+Math.round(n).toLocaleString('en-IN')}
@@ -647,7 +722,7 @@ async function submitLead(e){
     itr:document.getElementById('f-itr')?.value||'',
     income:document.getElementById('f-income')?.value||'',
     emis:document.getElementById('f-emis')?.value||'',
-    source:'Website Form',
+    ...getAttribution(),
     timestamp:new Date().toISOString()
   };
 
